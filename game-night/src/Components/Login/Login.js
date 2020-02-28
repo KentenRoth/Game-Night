@@ -1,4 +1,6 @@
 import React from 'react';
+import LargeButton from '../Buttons/LargeButton';
+import Input from '../Inputs/Input';
 
 function Login() {
 	return (
@@ -6,65 +8,22 @@ function Login() {
 			<div className="container">
 				<div styles={content}>
 					<form>
-						<input
-							type="text"
-							placeholder="Email Address"
-							style={inputStyle}
+						<Input type={'text'} place={'Email Address'} />
+
+						<Input type={'password'} place={'Password'} />
+
+						<LargeButton
+							type={'submit'}
+							color={'#88368D'}
+							text={'Login'}
 						/>
-						<input
-							type="password"
-							placeholder="Password"
-							style={inputStyle}
-						/>
-						<button type="submit" style={loginButtonStyle}>
-							Login
-						</button>
 					</form>
-					<button style={signUpButtonStyle}>Sign Up</button>
+					<LargeButton color={'#0F76C0'} text={'Sign Up'} />
 				</div>
 			</div>
 		</div>
 	);
 }
-
-const inputStyle = {
-	backgroundColor: '#333333',
-	border: 'none',
-	borderBottom: '1px solid white',
-	color: 'white',
-	display: 'block',
-	fontSize: '18px',
-	margin: '0 auto',
-	marginTop: '15px',
-	padding: '5px 5px 0px 5px',
-	width: '350px'
-};
-
-const loginButtonStyle = {
-	backgroundColor: '#88368D',
-	border: 'none',
-	borderRadius: '20px',
-	color: 'white',
-	fontSize: '15px',
-	fontWeight: 'bold',
-	letterSpacing: '0.1em',
-	margin: '30px 0px 15px 0px',
-	padding: '8px 0px',
-	width: '200px'
-};
-
-const signUpButtonStyle = {
-	backgroundColor: '#0F76C0',
-	border: 'none',
-	borderRadius: '20px',
-	color: 'white',
-	fontSize: '15px',
-	fontWeight: 'bold',
-	letterSpacing: '0.1em',
-	margin: '15px',
-	padding: '8px 0px',
-	width: '200px'
-};
 
 const content = {
 	justifyContent: 'center',

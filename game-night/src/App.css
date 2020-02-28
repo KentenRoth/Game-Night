@@ -75,6 +75,15 @@ button {
 	text-align: center;
 }
 
+.content {
+	align-items: center;
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	overflow: hidden;
+	width: 100vw;
+}
+
 @media (prefers-color-scheme: dark) {
 	body {
 		background-color: #333333;

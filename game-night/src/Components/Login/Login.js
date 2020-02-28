@@ -2,24 +2,26 @@ import React from 'react';
 
 function Login() {
 	return (
-		<div className="container">
-			<div>
-				<form>
-					<input
-						type="text"
-						placeholder="Email Address"
-						style={inputStyle}
-					/>
-					<input
-						type="password"
-						placeholder="Password"
-						style={inputStyle}
-					/>
-					<button type="submit" style={loginButtonStyle}>
-						Login
-					</button>
-				</form>
-				<button style={signUpButtonStyle}>Sign Up</button>
+		<div className="content">
+			<div className="container">
+				<div styles={content}>
+					<form>
+						<input
+							type="text"
+							placeholder="Email Address"
+							style={inputStyle}
+						/>
+						<input
+							type="password"
+							placeholder="Password"
+							style={inputStyle}
+						/>
+						<button type="submit" style={loginButtonStyle}>
+							Login
+						</button>
+					</form>
+					<button style={signUpButtonStyle}>Sign Up</button>
+				</div>
 			</div>
 		</div>
 	);
@@ -62,6 +64,12 @@ const signUpButtonStyle = {
 	margin: '15px',
 	padding: '8px 0px',
 	width: '200px'
+};
+
+const content = {
+	justifyContent: 'center',
+	margin: '0px',
+	textAlign: 'center'
 };
 
 export default Login;

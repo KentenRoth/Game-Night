@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import LargeButton from '../Buttons/LargeButton';
 import Input from '../Inputs/Input';
@@ -44,7 +44,9 @@ class CreateGame extends React.Component {
 								text={'Create Game'}
 							/>
 						</form>
-						<LargeButton text={'Join Game'} color={'#0F76C0'} />
+						<Link to="/gamelogin">
+							<LargeButton text={'Join Game'} color={'#0F76C0'} />
+						</Link>
 					</div>
 				</div>
 			</div>

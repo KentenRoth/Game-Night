@@ -4,6 +4,7 @@ import Login from './Components/Login/Login';
 import SignUp from './Components/SignUp/SignUp';
 import CreateGame from './Components/CreateGame/CreateGame';
 import GameLogin from './Components/GameLogin/GameLogin';
+import CreatePlayer from './Components/CreatePlayer/CreatePlayer';
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
 				<Route path="/signup" component={SignUp} />
 				<Route path="/creategame" component={CreateGame} />
 				<Route path="/gamelogin" component={GameLogin} />
+				<Route path="/createplayer" component={CreatePlayer} />
 			</Switch>
 		</BrowserRouter>
 	);

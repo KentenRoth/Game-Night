@@ -84,6 +84,12 @@ button {
 	width: 100vw;
 }
 
+.box {
+	justify-content: center;
+	margin: 0px;
+	text-align: center;
+}
+
 @media (prefers-color-scheme: dark) {
 	body {
 		background-color: #333333;

@@ -7,7 +7,7 @@ function Login() {
 	return (
 		<div className="content">
 			<div className="container">
-				<div styles={box}>
+				<div className="box">
 					<form onSubmit={onSubmit}>
 						<Input
 							type={'text'}
@@ -45,11 +45,4 @@ const onSubmit = e => {
 		})
 		.then(res => console.log(res));
 };
-
-const box = {
-	justifyContent: 'center',
-	margin: '0px',
-	textAlign: 'center'
-};
-
 export default Login;

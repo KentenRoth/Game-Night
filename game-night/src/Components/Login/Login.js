@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import LargeButton from '../Buttons/LargeButton';
 import Input from '../Inputs/Input';
+import { Link } from 'react-router-dom';
 
 function Login() {
 	return (
@@ -27,7 +28,9 @@ function Login() {
 							text={'Login'}
 						/>
 					</form>
-					<LargeButton color={'#0F76C0'} text={'Sign Up'} />
+					<Link to="/SignUp">
+						<LargeButton color={'#0F76C0'} text={'Sign Up'} />
+					</Link>
 				</div>
 			</div>
 		</div>

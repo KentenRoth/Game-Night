@@ -15,7 +15,12 @@ const Input = props => {
 	};
 
 	return (
-		<input type={props.type} placeholder={props.place} style={inputStyle} />
+		<input
+			type={props.type}
+			placeholder={props.place}
+			style={inputStyle}
+			name={props.name}
+		/>
 	);
 };
 

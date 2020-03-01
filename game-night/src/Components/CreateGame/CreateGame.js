@@ -1,50 +1,71 @@
 import React from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 import LargeButton from '../Buttons/LargeButton';
 import Input from '../Inputs/Input';
 
-const CreateGame = () => {
-	return (
-		<div className="content">
-			<div className="container">
-				<div className="box">
-					<form onSubmit={onSubmit}>
-						<Input
-							type={'text'}
-							place={'Game Name'}
-							name={'name'}
-						/>
+class CreateGame extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			redirect: false
+		};
+		this.onSubmit = this.onSubmit.bind(this);
+	}
 
-						<Input
-							type={'password'}
-							place={'Password'}
-							name={'password'}
-						/>
+	render() {
+		const { redirect } = this.state;
 
-						<LargeButton
-							type={'submit'}
-							color={'#88368D'}
-							text={'Create Game'}
-						/>
-					</form>
-					<LargeButton text={'Join Game'} color={'#0F76C0'} />
+		if (redirect) {
+			return <Redirect to="/createplayer" />;
+		}
+
+		return (
+			<div className="content">
+				<div className="container">
+					<div className="box">
+						<form onSubmit={this.onSubmit}>
+							<Input
+								type={'text'}
+								place={'Game Name'}
+								name={'name'}
+							/>
+
+							<Input
+								type={'password'}
+								place={'Password'}
+								name={'password'}
+							/>
+
+							<LargeButton
+								type={'submit'}
+								color={'#88368D'}
+								text={'Create Game'}
+							/>
+						</form>
+						<LargeButton text={'Join Game'} color={'#0F76C0'} />
+					</div>
 				</div>
 			</div>
-		</div>
-	);
-};
+		);
+	}
 
-const onSubmit = e => {
-	const name = e.target.name.value;
-	const password = e.target.password.value;
-	e.preventDefault();
-	axios
-		.post('/game', {
-			name,
-			password
-		})
-		.then(res => console.log(res));
-};
+	onSubmit(e) {
+		const name = e.target.name.value;
+		const password = e.target.password.value;
+		e.preventDefault();
+		axios
+			.post('/game', {
+				name,
+				password
+			})
+			.then(res => {
+				if (res.status === 201) {
+					this.setState({ redirect: true });
+				}
+			});
+	}
+}
 
 export default CreateGame;

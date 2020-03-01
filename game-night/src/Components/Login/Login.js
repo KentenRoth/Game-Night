@@ -2,50 +2,69 @@ import React from 'react';
 import axios from 'axios';
 import LargeButton from '../Buttons/LargeButton';
 import Input from '../Inputs/Input';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
-function Login() {
-	return (
-		<div className="content">
-			<div className="container">
-				<div className="box">
-					<form onSubmit={onSubmit}>
-						<Input
-							type={'text'}
-							place={'Email Address'}
-							name={'email'}
-						/>
+class Login extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			redirect: false
+		};
+		this.onSubmit = this.onSubmit.bind(this);
+	}
+	render() {
+		const { redirect } = this.state;
 
-						<Input
-							type={'password'}
-							place={'Password'}
-							name={'password'}
-						/>
+		if (redirect) {
+			return <Redirect to="/creategame" />;
+		}
+		return (
+			<div className="content">
+				<div className="container">
+					<div className="box">
+						<form onSubmit={this.onSubmit}>
+							<Input
+								type={'text'}
+								place={'Email Address'}
+								name={'email'}
+							/>
 
-						<LargeButton
-							type={'submit'}
-							color={'#88368D'}
-							text={'Login'}
-						/>
-					</form>
-					<Link to="/SignUp">
-						<LargeButton color={'#0F76C0'} text={'Sign Up'} />
-					</Link>
+							<Input
+								type={'password'}
+								place={'Password'}
+								name={'password'}
+							/>
+
+							<LargeButton
+								type={'submit'}
+								color={'#88368D'}
+								text={'Login'}
+							/>
+						</form>
+						<Link to="/SignUp">
+							<LargeButton color={'#0F76C0'} text={'Sign Up'} />
+						</Link>
+					</div>
 				</div>
 			</div>
-		</div>
-	);
+		);
+	}
+
+	onSubmit(e) {
+		e.preventDefault();
+		const email = e.target.email.value;
+		const password = e.target.password.value;
+		axios
+			.post('/user/login', {
+				email,
+				password
+			})
+			.then(res => {
+				if (res.status === 200) {
+					this.setState({ redirect: true });
+				}
+			});
+	}
 }
 
-const onSubmit = e => {
-	e.preventDefault();
-	const email = e.target.email.value;
-	const password = e.target.password.value;
-	axios
-		.post('/user/login', {
-			email,
-			password
-		})
-		.then(res => console.log(res));
-};
 export default Login;

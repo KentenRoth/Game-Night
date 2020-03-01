@@ -12,7 +12,7 @@ const CreatePlayer = () => {
 					<form onSubmit={onSubmit}>
 						<Input
 							type={'text'}
-							place={'Game Name'}
+							place={'Player Name'}
 							name={'name'}
 						/>
 

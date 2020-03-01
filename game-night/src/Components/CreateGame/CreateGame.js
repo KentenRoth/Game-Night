@@ -13,7 +13,7 @@ const CreateGame = () => {
 						<Input
 							type={'text'}
 							place={'Game Name'}
-							name={'game'}
+							name={'name'}
 						/>
 
 						<Input

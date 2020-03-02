@@ -34,6 +34,14 @@ const CreatePlayer = () => {
 	);
 };
 
+const token = localStorage.getItem('gameAuthToken');
+
+const config = {
+	headers: {
+		Authorization: 'Bearer ' + token
+	}
+};
+
 // Need to setup the config to grab the authToken from when game is created.
 const onSubmit = e => {
 	const name = e.target.name.value;
@@ -45,8 +53,8 @@ const onSubmit = e => {
 		{
 			name,
 			pin
-		}
-		// config
+		},
+		config
 	);
 };
 

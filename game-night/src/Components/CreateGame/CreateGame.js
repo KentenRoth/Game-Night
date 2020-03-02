@@ -64,6 +64,7 @@ class CreateGame extends React.Component {
 			})
 			.then(res => {
 				if (res.status === 201) {
+					localStorage.setItem('gameAuthToken', res.data.authToken);
 					this.setState({ redirect: true });
 				}
 			});

@@ -61,6 +61,8 @@ class Login extends React.Component {
 			})
 			.then(res => {
 				if (res.status === 200) {
+					localStorage.setItem('userID', res.data.user._id);
+					localStorage.setItem('userAuthToken', res.data.authToken);
 					this.setState({ redirect: true });
 				}
 			});

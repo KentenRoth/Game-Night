@@ -64,11 +64,38 @@ class CreateGame extends React.Component {
 			})
 			.then(res => {
 				if (res.status === 201) {
+					const gameAuthToken = res.data.authToken;
 					localStorage.setItem('gameAuthToken', res.data.authToken);
-					this.setState({ redirect: true });
+					axios
+						.patch(
+							`/user/${userID}`,
+							{
+								currentGames: [
+									{
+										gameName: name,
+										gameToken: gameAuthToken
+									}
+								]
+							},
+							config
+						)
+						.then(res => {
+							if (res.status === 200) {
+								this.setState({ redirect: true });
+							}
+						});
 				}
 			});
 	}
 }
+
+const token = localStorage.getItem('userAuthToken');
+const userID = localStorage.getItem('userID');
+
+const config = {
+	headers: {
+		Authorization: 'Bearer ' + token
+	}
+};
 
 export default CreateGame;

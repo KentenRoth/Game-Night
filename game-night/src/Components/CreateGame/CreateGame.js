@@ -70,12 +70,10 @@ class CreateGame extends React.Component {
 						.patch(
 							`/user/${userID}`,
 							{
-								currentGames: [
-									{
-										gameName: name,
-										gameToken: gameAuthToken
-									}
-								]
+								currentGames: {
+									gameName: name,
+									gameToken: gameAuthToken
+								}
 							},
 							config
 						)

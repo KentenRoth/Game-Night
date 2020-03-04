@@ -3,48 +3,85 @@ import axios from 'axios';
 
 import LargeButton from '../Buttons/LargeButton';
 import Input from '../Inputs/Input';
+import CurrentGames from './CurrentGames';
 
-const GameLogin = () => {
-	return (
-		<div className="content">
-			<div className="container">
-				<div className="box">
-					<form onSubmit={onSubmit}>
-						<Input
-							type={'text'}
-							place={'Game Name'}
-							name={'name'}
-						/>
+class GameLogin extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			redirect: false,
+			currentGames: []
+		};
+		this.onSubmit = this.onSubmit.bind(this);
+	}
 
-						<Input
-							type={'password'}
-							place={'Password'}
-							name={'password'}
-						/>
+	componentDidMount() {
+		const token = localStorage.getItem('userAuthToken');
+		const config = {
+			headers: {
+				Authorization: 'Bearer ' + token
+			}
+		};
 
-						<LargeButton
-							type={'submit'}
-							color={'#88368D'}
-							text={'Join Game'}
-						/>
-					</form>
+		const userID = localStorage.getItem('userID');
+		axios
+			.get(`/user/${userID}`, config)
+			.then(res =>
+				this.setState({ currentGames: res.data.currentGames })
+			);
+	}
+
+	onSubmit = e => {
+		const name = e.target.name.value;
+		const password = e.target.password.value;
+		e.preventDefault();
+
+		// on succesful login need to change screen to in game screen
+		// have not built out in game screen yet
+		axios
+			.post('/game/login', {
+				name,
+				password
+			})
+			.then(res => console.log(res));
+	};
+	render() {
+		return (
+			<div className="content">
+				<div className="container">
+					<div className="box">
+						{this.state.currentGames.map(game => (
+							<CurrentGames
+								key={game.gameToken}
+								gameName={game.gameName}
+								gameToken={game.gameToken}
+							/>
+						))}
+
+						<form onSubmit={this.onSubmit}>
+							<Input
+								type={'text'}
+								place={'Game Name'}
+								name={'name'}
+							/>
+
+							<Input
+								type={'password'}
+								place={'Password'}
+								name={'password'}
+							/>
+
+							<LargeButton
+								type={'submit'}
+								color={'#88368D'}
+								text={'Join Game'}
+							/>
+						</form>
+					</div>
 				</div>
 			</div>
-		</div>
-	);
-};
-
-const onSubmit = e => {
-	const name = e.target.name.value;
-	const password = e.target.password.value;
-	e.preventDefault();
-
-	axios
-		.post('/game/login', {
-			name,
-			password
-		})
-		.then(res => console.log(res));
-};
+		);
+	}
+}
 
 export default GameLogin;

@@ -54,7 +54,7 @@ class CreatePlayer extends React.Component {
 		const pin = e.target.pin.value;
 		const config = {
 			headers: {
-				Authorization: 'Bearer ' + this.token
+				Authorization: 'Bearer ' + this.state.token
 			}
 		};
 		e.preventDefault();

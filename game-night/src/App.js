@@ -5,6 +5,7 @@ import SignUp from './Components/SignUp/SignUp';
 import CreateGame from './Components/CreateGame/CreateGame';
 import GameLogin from './Components/GameLogin/GameLogin';
 import CreatePlayer from './Components/CreatePlayer/CreatePlayer';
+import InGame from './Components/InGame/InGame';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
 				<Route path="/creategame" component={CreateGame} />
 				<Route path="/gamelogin" component={GameLogin} />
 				<Route path="/createplayer" component={CreatePlayer} />
+				<Route path="/ingame" component={InGame} />
 			</Switch>
 		</BrowserRouter>
 	);

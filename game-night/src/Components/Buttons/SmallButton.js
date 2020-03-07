@@ -13,7 +13,7 @@ const SmallButton = props => {
 		letterSpacing: '0.1em',
 		margin: '10px',
 		padding: '2px',
-		width: '100px'
+		width: '150px'
 	};
 
 	return (

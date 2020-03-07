@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import LargeButton from '../Buttons/LargeButton';
 import Input from '../Inputs/Input';
-import CurrentGames from './CurrentGames';
+import CurrentGamesCard from './CurrentGamesCard';
 
 class GameLogin extends React.Component {
 	constructor(props) {
@@ -51,7 +51,7 @@ class GameLogin extends React.Component {
 				<div className="container">
 					<div className="box">
 						{this.state.currentGames.map(game => (
-							<CurrentGames
+							<CurrentGamesCard
 								key={game.gameToken}
 								gameName={game.gameName}
 								gameToken={game.gameToken}

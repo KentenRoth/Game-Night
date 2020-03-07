@@ -9,9 +9,14 @@ class CreateGame extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			redirect: false
+			redirect: false,
+			token: localStorage.getItem('userAuthToken')
 		};
 		this.onSubmit = this.onSubmit.bind(this);
+	}
+
+	componentDidMount() {
+		console.log(this.state.token);
 	}
 
 	render() {
@@ -56,6 +61,13 @@ class CreateGame extends React.Component {
 	onSubmit(e) {
 		const name = e.target.name.value;
 		const password = e.target.password.value;
+		const token = this.state.token;
+
+		const config = {
+			headers: {
+				Authorization: 'Bearer ' + token
+			}
+		};
 		e.preventDefault();
 		axios
 			.post('/game', {
@@ -64,7 +76,10 @@ class CreateGame extends React.Component {
 			})
 			.then(res => {
 				if (res.status === 201) {
+					console.log(res);
 					const gameAuthToken = res.data.authToken;
+					const gameID = res.data.game._id;
+					const userID = localStorage.getItem('userID');
 					localStorage.setItem('gameAuthToken', res.data.authToken);
 					axios
 						.patch(
@@ -72,7 +87,8 @@ class CreateGame extends React.Component {
 							{
 								currentGames: {
 									gameName: name,
-									gameToken: gameAuthToken
+									gameToken: gameAuthToken,
+									gameID
 								}
 							},
 							config
@@ -86,14 +102,5 @@ class CreateGame extends React.Component {
 			});
 	}
 }
-
-const token = localStorage.getItem('userAuthToken');
-const userID = localStorage.getItem('userID');
-
-const config = {
-	headers: {
-		Authorization: 'Bearer ' + token
-	}
-};
 
 export default CreateGame;

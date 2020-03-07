@@ -43,7 +43,13 @@ class GameLogin extends React.Component {
 				name,
 				password
 			})
-			.then(res => console.log(res));
+			.then(res => {
+				console.log(res);
+				if (res.status === 200) {
+					localStorage.setItem('gameID', res.data.game._id);
+					localStorage.setItem('gameAuthToken', res.data.authToken);
+				}
+			});
 	};
 	render() {
 		return (
@@ -52,7 +58,7 @@ class GameLogin extends React.Component {
 					<div className="box">
 						{this.state.currentGames.map(game => (
 							<CurrentGamesCard
-								key={game.gameToken}
+								key={game.gameName}
 								gameName={game.gameName}
 								gameToken={game.gameToken}
 							/>

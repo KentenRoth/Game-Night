@@ -81,6 +81,7 @@ class CreateGame extends React.Component {
 					const gameID = res.data.game._id;
 					const userID = localStorage.getItem('userID');
 					localStorage.setItem('gameAuthToken', res.data.authToken);
+					localStorage.setItem('GameID', gameID);
 					axios
 						.patch(
 							`/user/${userID}`,

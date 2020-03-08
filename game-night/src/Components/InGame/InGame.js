@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import InGamePlayerCard from './InGamePlayerCard';
+
 class InGame extends React.Component {
 	constructor(props) {
 		super(props);
@@ -13,7 +15,7 @@ class InGame extends React.Component {
 
 	componentDidMount() {
 		const token = this.state.gameToken;
-		const gameID = this.state.gameID;
+		// const gameID = this.state.gameID;
 		const config = {
 			headers: {
 				Authorization: 'Bearer ' + token
@@ -24,8 +26,20 @@ class InGame extends React.Component {
 		});
 	}
 	render() {
-		return <div></div>;
+		return (
+			<div className="container">
+				<div style={cards}>
+					{this.state.players.map(player => (
+						<InGamePlayerCard key={player._id} players={player} />
+					))}
+				</div>
+			</div>
+		);
 	}
 }
+
+const cards = {
+	margin: 'auto'
+};
 
 export default InGame;

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import LargeButton from '../Buttons/LargeButton';
 import Input from '../Inputs/Input';
@@ -17,8 +17,7 @@ class CreatePlayer extends React.Component {
 	render() {
 		const { redirect } = this.state;
 		if (redirect) {
-			//Page not created yet
-			//return <Redirect to="/InGame" />
+			return <Redirect to="/InGame" />;
 		}
 		return (
 			<div className="content">
@@ -59,14 +58,21 @@ class CreatePlayer extends React.Component {
 		};
 		e.preventDefault();
 
-		axios.post(
-			'/ingameuser',
-			{
-				name,
-				pin
-			},
-			config
-		);
+		axios
+			.post(
+				'/ingameuser',
+				{
+					name,
+					pin
+				},
+				config
+			)
+			.then(res => {
+				if (res.status === 200) {
+					localStorage.setItem('playerAuthToken', res.data.authToken);
+					this.setState({ redirect: true });
+				}
+			});
 	}
 }
 

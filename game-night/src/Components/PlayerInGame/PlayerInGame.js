@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import SmallButton from '../Buttons/SmallButton';
+import PlayerInGameCard from './PlayerInGameCard';
 
 class PlayerInGame extends React.Component {
 	constructor(props) {
@@ -31,17 +32,35 @@ class PlayerInGame extends React.Component {
 			}
 		};
 		axios.get(`/ingameuser/${playerID}`, configPlayer).then(res => {
-			console.log(res);
+			this.setState({ player: res.data });
 		});
 		axios.get('/ingameuser', configGame).then(res => {
-			console.log(res);
+			this.setState({ allPlayers: res.data });
 		});
 	}
 
+	content = {
+		display: 'flex',
+		flexWrap: 'wrap'
+	};
+
 	render() {
 		return (
-			<div>
-				<div></div>
+			<div className="container">
+				<div className="box">
+					<div style={this.content}>
+						{this.state.allPlayers.map(player => {
+							if (this.state.player._id !== player._id) {
+								return (
+									<PlayerInGameCard
+										players={player}
+										key={player._id}
+									/>
+								);
+							}
+						})}
+					</div>
+				</div>
 			</div>
 		);
 	}

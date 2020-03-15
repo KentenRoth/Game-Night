@@ -3,12 +3,16 @@ import axios from 'axios';
 
 import SmallButton from '../Buttons/SmallButton';
 import PlayerInGameCard from './PlayerInGameCard';
+import PropertyCard from './PropertyCard';
+import RRPropertyCard from './RRPropertyCard';
+import UtilsPropertyCard from './UtilsPropertyCard';
 
 class PlayerInGame extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			player: {},
+			playerProperty: [],
 			allPlayers: [],
 			playerID: localStorage.getItem('playerID'),
 			playerToken: localStorage.getItem('playerAuthToken'),
@@ -32,7 +36,10 @@ class PlayerInGame extends React.Component {
 			}
 		};
 		axios.get(`/ingameuser/${playerID}`, configPlayer).then(res => {
-			this.setState({ player: res.data });
+			this.setState({
+				player: res.data,
+				playerProperty: res.data.property
+			});
 		});
 		axios.get('/ingameuser', configGame).then(res => {
 			this.setState({ allPlayers: res.data });
@@ -131,6 +138,35 @@ class PlayerInGame extends React.Component {
 					<hr style={this.hrStyle} />
 					<div>
 						<p>My Properties</p>
+					</div>
+					<div style={this.content}>
+						{this.state.playerProperty.map(property => {
+							if (
+								property.Deed === 'Electric Company' ||
+								property.Deed === 'Water Works'
+							) {
+								return (
+									<UtilsPropertyCard
+										key={property.Deed}
+										property={property}
+									/>
+								);
+							}
+							if (property.Deed.includes('R.R.')) {
+								return (
+									<RRPropertyCard
+										key={property.Deed}
+										property={property}
+									/>
+								);
+							}
+							return (
+								<PropertyCard
+									key={property.Deed}
+									property={property}
+								/>
+							);
+						})}
 					</div>
 				</div>
 			</div>

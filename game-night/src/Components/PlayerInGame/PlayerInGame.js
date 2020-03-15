@@ -114,7 +114,7 @@ class PlayerInGame extends React.Component {
 					<hr style={this.hrStyle} />
 					<div className="row">
 						<div className="col-6">
-							<p>Money </p>
+							<p>Cash</p>
 							<div style={this.moneyStyle}>
 								{this.state.player.money}
 							</div>

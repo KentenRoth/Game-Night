@@ -129,11 +129,14 @@ class PlayerInGame extends React.Component {
 					<hr style={this.hrStyle} />
 					<div>
 						<SmallButton text={'Buy Property'} color={'green'} />
-						<SmallButton text={'Pay Rent'} color={'green'} />
-						<SmallButton text={'Pay Player'} color={'blue'} />
+						<SmallButton text={'Passed Go'} color={'green'} />
+						<SmallButton text={'Pay Rent'} color={'blue'} />
 						<SmallButton text={'Pay Bank'} color={'blue'} />
 						<SmallButton text={'Pay Taxes'} color={'green'} />
-						<SmallButton text={'Passed Go'} color={'green'} />
+						<SmallButton text={'Pay Player'} color={'green'} />
+						<SmallButton text={'Sell Property'} color={'blue'} />
+						<SmallButton text={'Pay Utilities'} color={'blue'} />
+						<input type="number" placeholder="Dice Amount" />
 					</div>
 					<hr style={this.hrStyle} />
 					<div>

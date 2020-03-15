@@ -1,6 +1,6 @@
 [
 	{
-		"Color": "Purple",
+		"Color": "#88368D",
 		"Deed": "Mediterranean Ave.",
 		"Price": 60,
 		"Rent": 2,
@@ -14,7 +14,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Purple",
+		"Color": "#88368D",
 		"Deed": "Baltic Ave.",
 		"Price": 60,
 		"Rent": 4,
@@ -28,7 +28,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Light Blue",
+		"Color": "#B7DAF5",
 		"Deed": "Oriental Ave.",
 		"Price": 100,
 		"Rent": 6,
@@ -42,7 +42,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Light Blue",
+		"Color": "#B7DAF5",
 		"Deed": "Vermont Ave.",
 		"Price": 100,
 		"Rent": 6,
@@ -56,7 +56,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Light Blue",
+		"Color": "#B7DAF5",
 		"Deed": "Connecticut Ave.",
 		"Price": 120,
 		"Rent": 8,
@@ -70,7 +70,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Pink",
+		"Color": "#CC2086",
 		"Deed": "St. Charles Place",
 		"Price": 140,
 		"Rent": 10,
@@ -84,7 +84,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Pink",
+		"Color": "#CC2086",
 		"Deed": "States Ave.",
 		"Price": 140,
 		"Rent": 10,
@@ -98,7 +98,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Pink",
+		"Color": "#CC2086",
 		"Deed": "Virginia Ave.",
 		"Price": 160,
 		"Rent": 12,
@@ -112,7 +112,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Orange",
+		"Color": "#FBAA1C",
 		"Deed": "St. James Place",
 		"Price": 180,
 		"Rent": 14,
@@ -126,7 +126,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Orange",
+		"Color": "#FBAA1C",
 		"Deed": "Tennessee Ave.",
 		"Price": 180,
 		"Rent": 14,
@@ -140,7 +140,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Orange",
+		"Color": "#FBAA1C",
 		"Deed": "New York Ave.",
 		"Price": 200,
 		"Rent": 16,
@@ -154,7 +154,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Red",
+		"Color": "#E73B27",
 		"Deed": "Kentucky Ave.",
 		"Price": 220,
 		"Rent": 18,
@@ -168,7 +168,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Red",
+		"Color": "#E73B27",
 		"Deed": "Indiana Ave.",
 		"Price": 220,
 		"Rent": 18,
@@ -182,7 +182,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Red",
+		"Color": "#E73B27",
 		"Deed": "Illinois Ave.",
 		"Price": 240,
 		"Rent": 20,
@@ -196,7 +196,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Yellow",
+		"Color": "#FDF029",
 		"Deed": "Atlantic",
 		"Price": 260,
 		"Rent": 22,
@@ -210,7 +210,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Yellow",
+		"Color": "#FDF029",
 		"Deed": "Ventnor Ave.",
 		"Price": 260,
 		"Rent": 22,
@@ -224,7 +224,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Yellow",
+		"Color": "#FDF029",
 		"Deed": "Marvin Gardens",
 		"Price": 280,
 		"Rent": 24,
@@ -238,7 +238,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Green",
+		"Color": "#18AC4C",
 		"Deed": "Pacific Ave.",
 		"Price": 300,
 		"Rent": 26,
@@ -252,7 +252,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Green",
+		"Color": "#18AC4C",
 		"Deed": "North Carolina Ave.",
 		"Price": 300,
 		"Rent": 26,
@@ -266,7 +266,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Green",
+		"Color": "#18AC4C",
 		"Deed": "Pennsylvania Ave.",
 		"Price": 320,
 		"Rent": 28,
@@ -280,7 +280,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Dark Blue",
+		"Color": "#0F76C0",
 		"Deed": "Park Plae",
 		"Price": 350,
 		"Rent": 35,
@@ -294,7 +294,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Dark Blue",
+		"Color": "#0F76C0",
 		"Deed": "Boardwalk",
 		"Price": 400,
 		"Rent": 50,
@@ -308,7 +308,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Gray",
+		"Color": "#888888",
 		"Deed": "Reading R.R.",
 		"Price": 200,
 		"Rent1": 25,
@@ -319,7 +319,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Gray",
+		"Color": "#888888",
 		"Deed": "Pennsylvania R.R.",
 		"Price": 200,
 		"Rent1": 25,
@@ -330,7 +330,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Gray",
+		"Color": "#888888",
 		"Deed": "B. & O. R.R.",
 		"Price": 200,
 		"Rent1": 25,
@@ -341,7 +341,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "Gray",
+		"Color": "#888888",
 		"Deed": "Short Line R.R.",
 		"Price": 200,
 		"Rent1": 25,
@@ -352,7 +352,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "White",
+		"Color": "#ffffff",
 		"Deed": "Electric Company",
 		"Price": 150,
 		"Rent1": "4 times dice",
@@ -361,7 +361,7 @@
 		"isMortgaged": false
 	},
 	{
-		"Color": "White",
+		"Color": "#ffffff",
 		"Deed": "Water Works",
 		"Price": 150,
 		"Rent1": "4 times dice",

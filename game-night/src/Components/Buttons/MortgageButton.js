@@ -2,7 +2,7 @@ import React from 'react';
 
 const MortgageButton = props => {
 	const isButtonDisabled = () => {
-		if (props.text === 'Buy House' && props.disabled === true) {
+		if (props.text === 'Buy House' && props.CanBuyHouse === false) {
 			return {
 				backgroundColor: props.color + '7F',
 				border: 'none',
@@ -33,7 +33,7 @@ const MortgageButton = props => {
 	};
 
 	const disabledButton = () => {
-		if (props.text === 'Buy House' && props.disabled === true) {
+		if (props.text === 'Buy House' && props.CanBuyHouse === false) {
 			return 'disabled';
 		}
 		return;

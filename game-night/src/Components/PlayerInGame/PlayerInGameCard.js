@@ -1,7 +1,6 @@
 import React from 'react';
 
 const PlayerInGameCard = props => {
-	console.log(props);
 	return (
 		<div style={boxContent}>
 			<div className="title">

@@ -9,8 +9,8 @@ html {
 }
 
 body {
-	background: #464545;
-	color: #e1e1e1;
+	background-color: #333333;
+	color: white;
 	font-family: 'EB Garamond', serif;
 	font-size: 1.8rem;
 }
@@ -89,10 +89,10 @@ button {
 	margin: 0px;
 	text-align: center;
 }
-
+/* 
 @media (prefers-color-scheme: dark) {
 	body {
 		background-color: #333333;
 		color: white;
 	}
-}
+} */

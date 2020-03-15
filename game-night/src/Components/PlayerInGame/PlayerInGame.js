@@ -44,9 +44,48 @@ class PlayerInGame extends React.Component {
 		flexWrap: 'wrap'
 	};
 
+	container = {
+		maxWidth: '600px',
+		margin: '0 auto',
+		padding: '0 1.6rem',
+		textAlign: 'center'
+	};
+
+	playerContent = {
+		background: '#555555',
+		border: '2px solid #B7DAF5',
+		borderRadius: '10px',
+		margin: '15px auto',
+		maxWidth: '400px'
+	};
+
+	title = {
+		fontSize: '20px',
+		fontWeight: 'bold'
+	};
+
+	hrStyle = {
+		border: '0',
+		borderTop: '2px solid  #B7DAF5',
+		height: '1px',
+		margin: '2px auto',
+		width: '90%'
+	};
+
+	moneyStyle = {
+		fontSize: '18px',
+		color: '#18f04C'
+	};
+
+	netStyle = {
+		fontSize: '18px',
+		fontWeight: 'bold',
+		color: '#18AC4C'
+	};
+
 	render() {
 		return (
-			<div className="container">
+			<div style={this.container}>
 				<div className="box">
 					<div style={this.content}>
 						{this.state.allPlayers.map(player => {
@@ -61,27 +100,38 @@ class PlayerInGame extends React.Component {
 						})}
 					</div>
 				</div>
-				<div>
-					<p>{this.state.player.name}</p>
-				</div>
-				<hr />
-				<div className="row">
-					<div className="col-6">
-						<p>Money </p>
-						<div>{this.state.player.money}</div>
+				<div style={this.playerContent}>
+					<div style={this.title}>
+						<p>{this.state.player.name}</p>
 					</div>
-					<div className="col-6">
-						<p>Net Worth </p>
-						<div>{this.state.player.netWorth}</div>
+					<hr style={this.hrStyle} />
+					<div className="row">
+						<div className="col-6">
+							<p>Money </p>
+							<div style={this.moneyStyle}>
+								{this.state.player.money}
+							</div>
+						</div>
+						<div className="col-6">
+							<p>Net Worth </p>
+							<div style={this.netStyle}>
+								{this.state.player.netWorth}
+							</div>
+						</div>
 					</div>
-				</div>
-				<hr />
-				<div>
-					<SmallButton text={'Buy Property'} color={'green'} />
-					<SmallButton text={'Pay Rent'} color={'green'} />
-					<SmallButton text={'Pay Player'} color={'blue'} />
-					<SmallButton text={'Pay Bank'} color={'blue'} />
-					<SmallButton text={'Pay Taxes'} color={'green'} />
+					<hr style={this.hrStyle} />
+					<div>
+						<SmallButton text={'Buy Property'} color={'green'} />
+						<SmallButton text={'Pay Rent'} color={'green'} />
+						<SmallButton text={'Pay Player'} color={'blue'} />
+						<SmallButton text={'Pay Bank'} color={'blue'} />
+						<SmallButton text={'Pay Taxes'} color={'green'} />
+						<SmallButton text={'Passed Go'} color={'green'} />
+					</div>
+					<hr style={this.hrStyle} />
+					<div>
+						<p>My Properties</p>
+					</div>
 				</div>
 			</div>
 		);

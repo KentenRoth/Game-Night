@@ -61,6 +61,28 @@ class PlayerInGame extends React.Component {
 						})}
 					</div>
 				</div>
+				<div>
+					<p>{this.state.player.name}</p>
+				</div>
+				<hr />
+				<div className="row">
+					<div className="col-6">
+						<p>Money </p>
+						<div>{this.state.player.money}</div>
+					</div>
+					<div className="col-6">
+						<p>Net Worth </p>
+						<div>{this.state.player.netWorth}</div>
+					</div>
+				</div>
+				<hr />
+				<div>
+					<SmallButton text={'Buy Property'} color={'green'} />
+					<SmallButton text={'Pay Rent'} color={'green'} />
+					<SmallButton text={'Pay Player'} color={'blue'} />
+					<SmallButton text={'Pay Bank'} color={'blue'} />
+					<SmallButton text={'Pay Taxes'} color={'green'} />
+				</div>
 			</div>
 		);
 	}

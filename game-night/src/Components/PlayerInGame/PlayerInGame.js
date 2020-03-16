@@ -14,6 +14,7 @@ class PlayerInGame extends React.Component {
 			player: {},
 			playerProperty: [],
 			allPlayers: [],
+			allPropertiesOwned: [],
 			playerID: localStorage.getItem('playerID'),
 			playerToken: localStorage.getItem('playerAuthToken'),
 			gameID: localStorage.getItem('gameID'),
@@ -43,6 +44,13 @@ class PlayerInGame extends React.Component {
 		});
 		axios.get('/ingameuser', configGame).then(res => {
 			this.setState({ allPlayers: res.data });
+			res.data.map(player =>
+				this.setState({
+					allPropertiesOwned: this.state.allPropertiesOwned.concat(
+						player.property
+					)
+				})
+			);
 		});
 	}
 
@@ -93,6 +101,7 @@ class PlayerInGame extends React.Component {
 	render() {
 		return (
 			<div style={this.container}>
+				{console.log(this.state.allPropertiesOwned)}
 				<div className="box">
 					<div style={this.content}>
 						{this.state.allPlayers.map(player => {

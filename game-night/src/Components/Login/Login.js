@@ -8,7 +8,8 @@ class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			redirect: false
+			redirect: false,
+			selectedInput: ''
 		};
 		this.onSubmit = this.onSubmit.bind(this);
 	}
@@ -27,12 +28,14 @@ class Login extends React.Component {
 								type={'text'}
 								place={'Email Address'}
 								name={'email'}
+								whatInput={this.whatInput}
 							/>
 
 							<Input
 								type={'password'}
 								place={'Password'}
 								name={'password'}
+								whatInput={this.whatInput}
 							/>
 
 							<LargeButton
@@ -49,6 +52,10 @@ class Login extends React.Component {
 			</div>
 		);
 	}
+
+	whatInput = e => {
+		console.log(e.target.name);
+	};
 
 	onSubmit(e) {
 		e.preventDefault();

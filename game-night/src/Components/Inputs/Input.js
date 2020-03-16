@@ -15,12 +15,16 @@ const Input = props => {
 	};
 
 	return (
-		<input
-			type={props.type}
-			placeholder={props.place}
-			style={inputStyle}
-			name={props.name}
-		/>
+		<div>
+			{console.log(props)}
+			<input
+				type={props.type}
+				placeholder={props.place}
+				style={inputStyle}
+				name={props.name}
+				onClick={props.whatInput}
+			/>
+		</div>
 	);
 };
 

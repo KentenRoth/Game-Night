@@ -101,7 +101,6 @@ class PlayerInGame extends React.Component {
 	render() {
 		return (
 			<div style={this.container}>
-				{console.log(this.state.allPropertiesOwned)}
 				<div className="box">
 					<div style={this.content}>
 						{this.state.allPlayers.map(player => {

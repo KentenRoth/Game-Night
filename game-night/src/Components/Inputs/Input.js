@@ -15,16 +15,14 @@ const Input = props => {
 	};
 
 	return (
-		<div>
-			{console.log(props)}
-			<input
-				type={props.type}
-				placeholder={props.place}
-				style={inputStyle}
-				name={props.name}
-				onClick={props.whatInput}
-			/>
-		</div>
+		<input
+			type={props.type}
+			placeholder={props.place}
+			style={inputStyle}
+			name={props.name}
+			onFocus={props.whatInput}
+			onBlur={props.clearInput}
+		/>
 	);
 };
 

@@ -23,12 +23,16 @@ class Login extends React.Component {
 			<div className="content">
 				<div className="container">
 					<div className="box">
+						<div>
+							<p>{this.state.selectedInput}</p>
+						</div>
 						<form onSubmit={this.onSubmit}>
 							<Input
 								type={'text'}
 								place={'Email Address'}
 								name={'email'}
 								whatInput={this.whatInput}
+								clearInput={this.clearInput}
 							/>
 
 							<Input
@@ -36,6 +40,7 @@ class Login extends React.Component {
 								place={'Password'}
 								name={'password'}
 								whatInput={this.whatInput}
+								clearInput={this.clearInput}
 							/>
 
 							<LargeButton
@@ -54,7 +59,20 @@ class Login extends React.Component {
 	}
 
 	whatInput = e => {
-		console.log(e.target.name);
+		if (e.target.name === 'email') {
+			return this.setState({ selectedInput: 'Email Address' });
+		}
+		if (e.target.name === 'password') {
+			return this.setState({ selectedInput: 'Password' });
+		}
+	};
+
+	clearInput = () => {
+		return this.setState({ selectedInput: '' });
+	};
+
+	passwordCheck = () => {
+		// ^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{5,15}$
 	};
 
 	onSubmit(e) {

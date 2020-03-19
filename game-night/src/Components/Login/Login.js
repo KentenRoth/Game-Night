@@ -9,7 +9,8 @@ class Login extends React.Component {
 		super(props);
 		this.state = {
 			redirect: false,
-			selectedInput: ''
+			selectedInput: '',
+			error: ''
 		};
 		this.onSubmit = this.onSubmit.bind(this);
 	}
@@ -23,6 +24,9 @@ class Login extends React.Component {
 			<div className="content">
 				<div className="container">
 					<div className="box">
+						<div>
+							<p style={this.error}>{this.state.error}</p>
+						</div>
 						<div>
 							<p>{this.state.selectedInput}</p>
 						</div>
@@ -58,21 +62,22 @@ class Login extends React.Component {
 		);
 	}
 
+	error = {
+		color: 'red',
+		fontSize: '20px'
+	};
+
 	whatInput = e => {
 		if (e.target.name === 'email') {
-			return this.setState({ selectedInput: 'Email Address' });
+			return this.setState({ selectedInput: 'Email Address', error: '' });
 		}
 		if (e.target.name === 'password') {
-			return this.setState({ selectedInput: 'Password' });
+			return this.setState({ selectedInput: 'Password', error: '' });
 		}
 	};
 
 	clearInput = () => {
 		return this.setState({ selectedInput: '' });
-	};
-
-	passwordCheck = () => {
-		// ^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{5,15}$
 	};
 
 	onSubmit(e) {
@@ -90,6 +95,9 @@ class Login extends React.Component {
 					localStorage.setItem('userAuthToken', res.data.authToken);
 					this.setState({ redirect: true });
 				}
+			})
+			.catch(e => {
+				this.setState({ error: 'Login Failed' });
 			});
 	}
 }

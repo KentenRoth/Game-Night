@@ -223,20 +223,20 @@ class SignUp extends React.Component {
 			return;
 		}
 
-		// axios
-		// 	.post('./user', {
-		// 		name,
-		// 		username,
-		// 		email,
-		// 		password
-		// 	})
-		// 	.then(res => {
-		// 		if (res.status === 201) {
-		// 			localStorage.setItem('userAuthToken', res.data.authToken);
-		// 			localStorage.setItem('userID', res.data.user._id);
-		// 			this.setState({ redirect: true });
-		// 		}
-		// 	});
+		axios
+			.post('./user', {
+				name,
+				username,
+				email,
+				password
+			})
+			.then(res => {
+				if (res.status === 201) {
+					localStorage.setItem('userAuthToken', res.data.authToken);
+					localStorage.setItem('userID', res.data.user._id);
+					this.setState({ redirect: true });
+				}
+			});
 	}
 
 	title = {

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 
 import LargeButton from '../Buttons/LargeButton';
 import Input from '../Inputs/Input';
@@ -34,6 +35,7 @@ class SignUp extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			fade: false,
 			redirect: false,
 			errors: [],
 			selectedInput: ''
@@ -54,7 +56,14 @@ class SignUp extends React.Component {
 						<div>
 							{errors.map(error => this.errorDisplay(error))}
 						</div>
-						<div>{this.inputDisplay()}</div>
+						<CSSTransition
+							in={this.state.fade}
+							timeout={1000}
+							classNames={'fade'}
+						>
+							<div>{this.inputDisplay()}</div>
+						</CSSTransition>
+
 						<form onSubmit={this.onSubmit}>
 							<Input
 								type={'text'}
@@ -103,11 +112,11 @@ class SignUp extends React.Component {
 	}
 
 	whatInput = e => {
-		return this.setState({ selectedInput: e.target.name });
+		return this.setState({ selectedInput: e.target.name, fade: true });
 	};
 
 	clearInput = () => {
-		return this.setState({ selectedInput: '' });
+		return this.setState({ selectedInput: '', fade: false });
 	};
 
 	inputDisplay = () => {

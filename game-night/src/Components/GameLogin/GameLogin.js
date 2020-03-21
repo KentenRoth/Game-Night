@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { CSSTransition } from 'react-transition-group';
 
 import LargeButton from '../Buttons/LargeButton';
 import Input from '../Inputs/Input';
@@ -10,7 +11,9 @@ class GameLogin extends React.Component {
 		super(props);
 		this.state = {
 			redirect: false,
-			currentGames: []
+			currentGames: [],
+			cardAppear: false,
+			selectedInput: ''
 		};
 		this.onSubmit = this.onSubmit.bind(this);
 	}
@@ -24,11 +27,12 @@ class GameLogin extends React.Component {
 		};
 
 		const userID = localStorage.getItem('userID');
-		axios
-			.get(`/user/${userID}`, config)
-			.then(res =>
-				this.setState({ currentGames: res.data.currentGames })
-			);
+		axios.get(`/user/${userID}`, config).then(res =>
+			this.setState({
+				currentGames: res.data.currentGames,
+				cardAppear: true
+			})
+		);
 	}
 
 	onSubmit = e => {
@@ -56,25 +60,46 @@ class GameLogin extends React.Component {
 			<div className="content">
 				<div className="container">
 					<div className="box">
-						{this.state.currentGames.map(game => (
-							<CurrentGamesCard
-								key={game.gameName}
-								gameName={game.gameName}
-								gameToken={game.gameToken}
-							/>
-						))}
-
+						<CSSTransition
+							in={this.state.cardAppear}
+							appear={true}
+							timeout={1000}
+							classNames={'fade'}
+						>
+							<div>
+								{this.state.currentGames.map(game => (
+									<CurrentGamesCard
+										key={game.gameName}
+										gameName={game.gameName}
+										gameToken={game.gameToken}
+									/>
+								))}
+							</div>
+						</CSSTransition>
+						<div>
+							<CSSTransition
+								in={this.state.fade}
+								timeout={1000}
+								classNames={'fade'}
+							>
+								<p>{this.state.selectedInput}</p>
+							</CSSTransition>
+						</div>
 						<form onSubmit={this.onSubmit}>
 							<Input
 								type={'text'}
 								place={'Game Name'}
 								name={'name'}
+								whatInput={this.whatInput}
+								clearInput={this.clearInput}
 							/>
 
 							<Input
 								type={'password'}
 								place={'Password'}
 								name={'password'}
+								whatInput={this.whatInput}
+								clearInput={this.clearInput}
 							/>
 
 							<LargeButton
@@ -88,6 +113,27 @@ class GameLogin extends React.Component {
 			</div>
 		);
 	}
+
+	whatInput = e => {
+		if (e.target.name === 'name') {
+			return this.setState({
+				selectedInput: 'Game Name',
+				error: '',
+				fade: true
+			});
+		}
+		if (e.target.name === 'password') {
+			return this.setState({
+				selectedInput: 'Password',
+				error: '',
+				fade: true
+			});
+		}
+	};
+
+	clearInput = () => {
+		return this.setState({ selectedInput: '', fade: false });
+	};
 }
 
 export default GameLogin;

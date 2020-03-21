@@ -3,11 +3,13 @@ import axios from 'axios';
 import LargeButton from '../Buttons/LargeButton';
 import Input from '../Inputs/Input';
 import { Redirect, Link } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 
 class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			fade: false,
 			redirect: false,
 			selectedInput: '',
 			error: ''
@@ -28,7 +30,13 @@ class Login extends React.Component {
 							<p style={this.error}>{this.state.error}</p>
 						</div>
 						<div>
-							<p>{this.state.selectedInput}</p>
+							<CSSTransition
+								in={this.state.fade}
+								timeout={1000}
+								classNames={'fade'}
+							>
+								<p>{this.state.selectedInput}</p>
+							</CSSTransition>
 						</div>
 						<form onSubmit={this.onSubmit}>
 							<Input
@@ -69,15 +77,23 @@ class Login extends React.Component {
 
 	whatInput = e => {
 		if (e.target.name === 'email') {
-			return this.setState({ selectedInput: 'Email Address', error: '' });
+			return this.setState({
+				selectedInput: 'Email Address',
+				error: '',
+				fade: true
+			});
 		}
 		if (e.target.name === 'password') {
-			return this.setState({ selectedInput: 'Password', error: '' });
+			return this.setState({
+				selectedInput: 'Password',
+				error: '',
+				fade: true
+			});
 		}
 	};
 
 	clearInput = () => {
-		return this.setState({ selectedInput: '' });
+		return this.setState({ selectedInput: '', fade: false });
 	};
 
 	onSubmit(e) {

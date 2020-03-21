@@ -31,7 +31,7 @@ class CreatePlayer extends React.Component {
 								timeout={1000}
 								classNames={'fade'}
 							>
-								<p>{this.state.selectedInput}</p>
+								<p>{this.inputDisplay()}</p>
 							</CSSTransition>
 						</div>
 						<form onSubmit={this.onSubmit}>
@@ -64,19 +64,35 @@ class CreatePlayer extends React.Component {
 	}
 
 	whatInput = e => {
-		if (e.target.name === 'name') {
-			return this.setState({
-				selectedInput: 'Player Name',
-				error: '',
-				fade: true
-			});
-		}
-		if (e.target.name === 'pin') {
-			return this.setState({
-				selectedInput: 'Pin Number',
-				error: '',
-				fade: true
-			});
+		return this.setState({
+			selectedInput: e.target.name,
+			error: '',
+			fade: true
+		});
+	};
+
+	inputDisplay = () => {
+		switch (this.state.selectedInput) {
+			case 'name':
+				return (
+					<div>
+						<div style={this.title}>
+							Player Name
+							<p style={this.bullet}>2-20 characters</p>
+						</div>
+					</div>
+				);
+			case 'pin':
+				return (
+					<div>
+						<div style={this.title}>
+							Pin
+							<p style={this.bullet}>4 digit number</p>
+						</div>
+					</div>
+				);
+			default:
+				return <div></div>;
 		}
 	};
 
@@ -110,6 +126,28 @@ class CreatePlayer extends React.Component {
 				}
 			});
 	}
+
+	title = {
+		fontSize: '20px'
+	};
+
+	bullet = {
+		fontSize: '15px'
+	};
+
+	errorTags = {
+		margin: '10px'
+	};
+
+	titleError = {
+		color: 'red',
+		fontSize: '20px'
+	};
+
+	bulletError = {
+		color: 'red',
+		fontSize: '15px'
+	};
 }
 
 export default CreatePlayer;

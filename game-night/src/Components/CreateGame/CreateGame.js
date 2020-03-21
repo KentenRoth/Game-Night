@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Redirect, Link } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 
 import LargeButton from '../Buttons/LargeButton';
 import Input from '../Inputs/Input';
@@ -10,13 +11,15 @@ class CreateGame extends React.Component {
 		super(props);
 		this.state = {
 			redirect: false,
-			token: localStorage.getItem('userAuthToken')
+			token: localStorage.getItem('userAuthToken'),
+			selectedInput: '',
+			fade: false
 		};
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 
 	componentDidMount() {
-		console.log(this.state.token);
+		// console.log(this.state.token);
 	}
 
 	render() {
@@ -30,17 +33,31 @@ class CreateGame extends React.Component {
 			<div className="content">
 				<div className="container">
 					<div className="box">
+						<CSSTransition
+							in={this.state.fade}
+							timeout={1000}
+							classNames={'fade'}
+						>
+							<div>
+								<p>{this.state.selectedInput}</p>
+							</div>
+						</CSSTransition>
+
 						<form onSubmit={this.onSubmit}>
 							<Input
 								type={'text'}
 								place={'Game Name'}
 								name={'name'}
+								whatInput={this.whatInput}
+								clearInput={this.clearInput}
 							/>
 
 							<Input
 								type={'password'}
 								place={'Password'}
 								name={'password'}
+								whatInput={this.whatInput}
+								clearInput={this.clearInput}
 							/>
 
 							<LargeButton
@@ -57,6 +74,25 @@ class CreateGame extends React.Component {
 			</div>
 		);
 	}
+
+	whatInput = e => {
+		if (e.target.name === 'name') {
+			return this.setState({
+				selectedInput: 'Game Name',
+				fade: true
+			});
+		}
+		if (e.target.name === 'password') {
+			return this.setState({
+				selectedInput: 'Password',
+				fade: true
+			});
+		}
+	};
+
+	clearInput = () => {
+		return this.setState({ selectedInput: '', fade: false });
+	};
 
 	onSubmit(e) {
 		const name = e.target.name.value;

@@ -90,19 +90,34 @@ button {
 	text-align: center;
 }
 
+.card-fade-enter {
+	opacity: 0;
+}
+.card-fade-enter-active {
+	opacity: 1;
+	transition: opacity 1000ms linear;
+}
+.card-fade-exit {
+	opacity: 1;
+}
+.card-fade-exit-active {
+	opacity: 0;
+	transition: opacity 300ms linear;
+}
+
 .fade-enter {
 	opacity: 0;
 }
 .fade-enter-active {
 	opacity: 1;
-	transition: opacity 800ms;
+	transition: opacity 800ms linear;
 }
 .fade-exit {
 	opacity: 1;
 }
 .fade-exit-active {
 	opacity: 0;
-	transition: opacity 300ms;
+	transition: opacity 300ms linear;
 }
 
 /* 

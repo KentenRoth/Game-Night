@@ -36,23 +36,31 @@ class PlayerInGame extends React.Component {
 				Authorization: 'Bearer ' + gameToken
 			}
 		};
-		axios.get(`/ingameuser/${playerID}`, configPlayer).then(res => {
-			this.setState({
-				player: res.data,
-				playerProperty: res.data.property
-			});
-		});
-		axios.get('/ingameuser', configGame).then(res => {
-			this.setState({ allPlayers: res.data });
-			res.data.map(player =>
+		const inGameUser = axios.get('/ingameuser', configGame);
+		const inGameUserID = axios.get(`/ingameuser/${playerID}`, configPlayer);
+
+		axios.all([inGameUser, inGameUserID]).then(
+			axios.spread((...response) => {
+				const resOne = response[0];
+				const resTwo = response[1];
 				this.setState({
-					allPropertiesOwned: this.state.allPropertiesOwned.concat(
-						player.property
-					)
-				})
-			);
-		});
+					allPlayers: resOne.data,
+					player: resTwo.data,
+					playerProperty: resTwo.data.property,
+					allPropertiesOwned: this.allProperties(resOne)
+				});
+			})
+		);
 	}
+
+	allProperties = res => {
+		let properties = [];
+		res.data.map(player => {
+			properties.push(player.property);
+		});
+		var merged = [].concat.apply([], properties);
+		return merged;
+	};
 
 	content = {
 		display: 'flex',
@@ -102,6 +110,7 @@ class PlayerInGame extends React.Component {
 		return (
 			<div style={this.container}>
 				<div className="box">
+					{console.log('running')}
 					<div style={this.content}>
 						{this.state.allPlayers.map(player => {
 							if (this.state.player._id !== player._id) {

@@ -6,13 +6,31 @@ import { CSSTransition } from 'react-transition-group';
 import LargeButton from '../Buttons/LargeButton';
 import Input from '../Inputs/Input';
 
+function checkInputsBeforeSubmit(name, pin) {
+	const isBetween = (num, min, max) => {
+		return num >= min && num <= max;
+	};
+	console.log('running');
+
+	let errors = [];
+
+	const pinRegex = new RegExp('^[0-9]{4}$');
+
+	if (isBetween(name.length, 2, 20) === false) errors.push('name');
+
+	if (pinRegex.test(pin) === false) errors.push('pin');
+
+	return errors;
+}
+
 class CreatePlayer extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			redirect: false,
 			token: localStorage.getItem('gameAuthToken'),
-			fade: false
+			fade: false,
+			errors: []
 		};
 		this.onSubmit = this.onSubmit.bind(this);
 	}
@@ -31,7 +49,7 @@ class CreatePlayer extends React.Component {
 								timeout={1000}
 								classNames={'fade'}
 							>
-								<p>{this.inputDisplay()}</p>
+								{this.inputDisplay()}
 							</CSSTransition>
 						</div>
 						<form onSubmit={this.onSubmit}>
@@ -66,7 +84,6 @@ class CreatePlayer extends React.Component {
 	whatInput = e => {
 		return this.setState({
 			selectedInput: e.target.name,
-			error: '',
 			fade: true
 		});
 	};
@@ -101,6 +118,7 @@ class CreatePlayer extends React.Component {
 	};
 
 	onSubmit(e) {
+		e.preventDefault();
 		const name = e.target.name.value;
 		const pin = e.target.pin.value;
 		const config = {
@@ -108,8 +126,14 @@ class CreatePlayer extends React.Component {
 				Authorization: 'Bearer ' + this.state.token
 			}
 		};
-		e.preventDefault();
+		const errors = checkInputsBeforeSubmit(name, pin);
 
+		if (errors.length > 0) {
+			this.setState({ errors });
+			return;
+		}
+
+		console.log('submit');
 		axios
 			.post(
 				'/ingameuser',

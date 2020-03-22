@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 import Login from './Components/Login/Login';
 import SignUp from './Components/SignUp/SignUp';
 import CreateGame from './Components/CreateGame/CreateGame';
@@ -9,21 +10,88 @@ import InGame from './Components/InGame/InGame';
 import PlayerInGame from './Components/PlayerInGame/PlayerInGame';
 import './App.css';
 
-function App() {
-	return (
-		<BrowserRouter>
-			<Switch>
-				<Route path="/" component={Login} exact />
-				<Route path="/login" component={Login} />
-				<Route path="/signup" component={SignUp} />
-				<Route path="/creategame" component={CreateGame} />
-				<Route path="/gamelogin" component={GameLogin} />
-				<Route path="/createplayer" component={CreatePlayer} />
-				<Route path="/ingame" component={InGame} />
-				<Route path="/playeringame" component={PlayerInGame} />
-			</Switch>
-		</BrowserRouter>
-	);
+class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			allPlayers: [],
+			allPropertiesOwned: [],
+			playerID: localStorage.getItem('playerID'),
+			playerToken: localStorage.getItem('playerAuthToken'),
+			gameID: localStorage.getItem('gameID'),
+			gameToken: localStorage.getItem('gameAuthToken')
+		};
+	}
+
+	componentDidMount() {}
+
+	render() {
+		return (
+			<BrowserRouter>
+				<Switch>
+					<Route path="/" component={Login} exact />
+					<Route path="/login" component={Login} />
+					<Route path="/signup" component={SignUp} />
+					<Route path="/creategame" component={CreateGame} />
+					<Route path="/gamelogin" component={GameLogin} />
+					<Route path="/createplayer" component={CreatePlayer} />
+					<Route
+						path="/ingame"
+						render={() => <InGame getData={this.getData} />}
+					/>
+					<Route
+						path="/playeringame"
+						render={() => (
+							<PlayerInGame
+								playerData={this.state}
+								getData={this.getData}
+							/>
+						)}
+					/>
+				</Switch>
+			</BrowserRouter>
+		);
+	}
+
+	getData = () => {
+		const playerID = this.state.playerID;
+		const playerToken = this.state.playerToken;
+		const gameToken = this.state.gameToken;
+		const configPlayer = {
+			headers: {
+				Authorization: 'Bearer ' + playerToken
+			}
+		};
+		const configGame = {
+			headers: {
+				Authorization: 'Bearer ' + gameToken
+			}
+		};
+		const inGameUser = axios.get('/ingameuser', configGame);
+		const inGameUserID = axios.get(`/ingameuser/${playerID}`, configPlayer);
+
+		axios.all([inGameUser, inGameUserID]).then(
+			axios.spread((...response) => {
+				const resOne = response[0];
+				const resTwo = response[1];
+				this.setState({
+					allPlayers: resOne.data,
+					player: resTwo.data,
+					playerProperty: resTwo.data.property,
+					allPropertiesOwned: this.allProperties(resOne)
+				});
+			})
+		);
+	};
+
+	allProperties = res => {
+		let properties = [];
+		res.data.map(player => {
+			properties.push(player.property);
+		});
+		var merged = [].concat.apply([], properties);
+		return merged;
+	};
 }
 
 export default App;

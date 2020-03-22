@@ -22,45 +22,39 @@ class PlayerInGame extends React.Component {
 		};
 	}
 
-	componentDidMount() {
-		const playerID = this.state.playerID;
-		const playerToken = this.state.playerToken;
-		const gameToken = this.state.gameToken;
-		const configPlayer = {
-			headers: {
-				Authorization: 'Bearer ' + playerToken
-			}
-		};
-		const configGame = {
-			headers: {
-				Authorization: 'Bearer ' + gameToken
-			}
-		};
-		const inGameUser = axios.get('/ingameuser', configGame);
-		const inGameUserID = axios.get(`/ingameuser/${playerID}`, configPlayer);
-
-		axios.all([inGameUser, inGameUserID]).then(
-			axios.spread((...response) => {
-				const resOne = response[0];
-				const resTwo = response[1];
-				this.setState({
-					allPlayers: resOne.data,
-					player: resTwo.data,
-					playerProperty: resTwo.data.property,
-					allPropertiesOwned: this.allProperties(resOne)
-				});
-			})
-		);
+	componentDidUpdate(prevProps) {
+		if (prevProps !== this.props) {
+			this.setState({
+				player: this.props.playerData.player,
+				playerProperty: this.props.playerData.player.property,
+				allPlayers: this.nonPlayer(),
+				allPropertiesOwned: this.props.playerData.allPropertiesOwned
+			});
+			this.nonPlayer();
+		}
+		return;
 	}
 
-	allProperties = res => {
-		let properties = [];
-		res.data.map(player => {
-			properties.push(player.property);
+	getPlayerData = () => {
+		let me;
+		var myPlayer = this.props.playerData.player._id;
+		this.props.playerData.allPlayers.map(player => {
+			if (player._id !== myPlayer) {
+				return;
+			}
+			return (me = player);
 		});
-		var merged = [].concat.apply([], properties);
-		return merged;
+		return me;
 	};
+
+	nonPlayer = () => {
+		var notPlayer = this.props.playerData.player._id;
+		let array = this.props.playerData.allPlayers;
+		return (array = array.filter(player => player._id !== notPlayer));
+	};
+	componentDidMount() {
+		this.props.getData();
+	}
 
 	content = {
 		display: 'flex',
@@ -110,7 +104,6 @@ class PlayerInGame extends React.Component {
 		return (
 			<div style={this.container}>
 				<div className="box">
-					{console.log('running')}
 					<div style={this.content}>
 						{this.state.allPlayers.map(player => {
 							if (this.state.player._id !== player._id) {

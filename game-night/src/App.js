@@ -14,6 +14,8 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			player: {},
+			playerProperty: [],
 			allPlayers: [],
 			allPropertiesOwned: [],
 			playerID: localStorage.getItem('playerID'),
@@ -67,13 +69,15 @@ class App extends React.Component {
 				Authorization: 'Bearer ' + gameToken
 			}
 		};
-		const inGameUser = axios.get('/ingameuser', configGame);
+		const inGamePlayers = axios.get('/ingameuser', configGame);
 		const inGameUserID = axios.get(`/ingameuser/${playerID}`, configPlayer);
 
-		axios.all([inGameUser, inGameUserID]).then(
+		axios.all([inGamePlayers, inGameUserID]).then(
 			axios.spread((...response) => {
 				const resOne = response[0];
 				const resTwo = response[1];
+				this.playersNetWorth(resOne);
+				this.myNetWorth(resTwo);
 				this.setState({
 					allPlayers: resOne.data,
 					player: resTwo.data,
@@ -91,6 +95,26 @@ class App extends React.Component {
 		});
 		var merged = [].concat.apply([], properties);
 		return merged;
+	};
+
+	myNetWorth = player => {
+		let netWorth = 0;
+
+		player.data.property.map(value => {
+			netWorth = value.Price + netWorth;
+		});
+		player.data.netWorth = netWorth + player.data.money;
+	};
+
+	playersNetWorth = player => {
+		let netWorth = 0;
+		player.data.map(getNet => {
+			netWorth = 0;
+			getNet.property.map(value => {
+				netWorth = value.Price + netWorth;
+			});
+			getNet.netWorth = netWorth + getNet.money;
+		});
 	};
 }
 

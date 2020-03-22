@@ -35,7 +35,7 @@ class CreatePlayer extends React.Component {
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 	render() {
-		const { redirect } = this.state;
+		const { redirect, errors } = this.state;
 		if (redirect) {
 			return <Redirect to="/InGame" />;
 		}
@@ -44,14 +44,16 @@ class CreatePlayer extends React.Component {
 				<div className="container">
 					<div className="box">
 						<div>
-							<CSSTransition
-								in={this.state.fade}
-								timeout={1000}
-								classNames={'fade'}
-							>
-								{this.inputDisplay()}
-							</CSSTransition>
+							{errors.map(error => this.errorDisplay(error))}
 						</div>
+						<CSSTransition
+							in={this.state.fade}
+							timeout={1000}
+							classNames={'fade'}
+						>
+							{this.inputDisplay()}
+						</CSSTransition>
+
 						<form onSubmit={this.onSubmit}>
 							<Input
 								type={'text'}
@@ -113,6 +115,31 @@ class CreatePlayer extends React.Component {
 		}
 	};
 
+	errorDisplay = error => {
+		switch (error) {
+			case 'name':
+				return (
+					<div key={error} style={this.errorTags}>
+						<div style={this.titleError}>
+							Player Name
+							<p style={this.bulletError}>2-20 characters</p>
+						</div>
+					</div>
+				);
+			case 'pin':
+				return (
+					<div key={error} style={this.errorTags}>
+						<div style={this.titleError}>
+							Pin
+							<p style={this.bulletError}>4 digit number</p>
+						</div>
+					</div>
+				);
+			default:
+				return;
+		}
+	};
+
 	clearInput = () => {
 		return this.setState({ selectedInput: '', fade: false });
 	};
@@ -133,7 +160,6 @@ class CreatePlayer extends React.Component {
 			return;
 		}
 
-		console.log('submit');
 		axios
 			.post(
 				'/ingameuser',

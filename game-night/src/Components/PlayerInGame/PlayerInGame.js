@@ -60,13 +60,116 @@ class PlayerInGame extends React.Component {
 		this.props.getData();
 	}
 
+	// Paying Rent Amount.  Needs to figure out what player to pay to
 	payRent = value => {
 		this.setState({ rentAmount: value });
 	};
 
+	// Paying Bank a set amount.
 	payBank = value => {
 		console.log(value);
 	};
+
+	render() {
+		return (
+			<div style={this.container}>
+				<div className="box">
+					<div style={this.content}>
+						{this.state.allPlayers.map(player => {
+							if (this.state.player._id !== player._id) {
+								return (
+									<PlayerInGameCard
+										players={player}
+										key={player._id}
+									/>
+								);
+							}
+							return <div></div>;
+						})}
+					</div>
+				</div>
+				<div style={this.playerContent}>
+					<div style={this.title}>
+						<p>{this.state.player.name}</p>
+					</div>
+					<hr style={this.hrStyle} />
+					<div className="row">
+						<div className="col-6">
+							<p>Cash</p>
+							<div style={this.moneyStyle}>
+								{this.state.player.money}
+							</div>
+						</div>
+						<div className="col-6">
+							<p>Net Worth </p>
+							<div style={this.netStyle}>
+								{this.state.player.netWorth}
+							</div>
+						</div>
+					</div>
+					<hr style={this.hrStyle} />
+					<div>
+						<SmallButton text={'Buy Property'} color={'green'} />
+						<SmallButton text={'Passed Go'} color={'green'} />
+						<div className="row">
+							<div className="col-6">
+								<PayRent
+									allPlayers={this.state.allPlayers}
+									text={'Pay Rent'}
+									payRent={this.payRent}
+								/>
+							</div>
+							<div className="col-6">
+								<PayBank
+									text={'Pay Bank'}
+									payBank={this.payBank}
+								/>
+							</div>
+						</div>
+
+						<SmallButton text={'Pay Taxes'} color={'green'} />
+						<SmallButton text={'Pay Player'} color={'green'} />
+						<SmallButton text={'Sell Property'} color={'blue'} />
+						<SmallButton text={'Pay Utilities'} color={'blue'} />
+						<input type="number" placeholder="Dice Amount" />
+					</div>
+					<hr style={this.hrStyle} />
+					<div>
+						<p>My Properties</p>
+					</div>
+					<div style={this.content}>
+						{this.state.playerProperty.map(property => {
+							if (
+								property.Deed === 'Electric Company' ||
+								property.Deed === 'Water Works'
+							) {
+								return (
+									<UtilsPropertyCard
+										key={property.Deed}
+										property={property}
+									/>
+								);
+							}
+							if (property.Deed.includes('R.R.')) {
+								return (
+									<RRPropertyCard
+										key={property.Deed}
+										property={property}
+									/>
+								);
+							}
+							return (
+								<PropertyCard
+									key={property.Deed}
+									property={property}
+								/>
+							);
+						})}
+					</div>
+				</div>
+			</div>
+		);
+	}
 
 	content = {
 		display: 'flex',
@@ -111,98 +214,6 @@ class PlayerInGame extends React.Component {
 		fontWeight: 'bold',
 		color: '#18AC4C'
 	};
-
-	render() {
-		return (
-			<div style={this.container}>
-				<div className="box">
-					<div style={this.content}>
-						{this.state.allPlayers.map(player => {
-							if (this.state.player._id !== player._id) {
-								return (
-									<PlayerInGameCard
-										players={player}
-										key={player._id}
-									/>
-								);
-							}
-							return <div></div>;
-						})}
-					</div>
-				</div>
-				<div style={this.playerContent}>
-					<div style={this.title}>
-						<p>{this.state.player.name}</p>
-					</div>
-					<hr style={this.hrStyle} />
-					<div className="row">
-						<div className="col-6">
-							<p>Cash</p>
-							<div style={this.moneyStyle}>
-								{this.state.player.money}
-							</div>
-						</div>
-						<div className="col-6">
-							<p>Net Worth </p>
-							<div style={this.netStyle}>
-								{this.state.player.netWorth}
-							</div>
-						</div>
-					</div>
-					<hr style={this.hrStyle} />
-					<div>
-						<SmallButton text={'Buy Property'} color={'green'} />
-						<SmallButton text={'Passed Go'} color={'green'} />
-						<PayRent
-							allPlayers={this.state.allPlayers}
-							text={'Pay Rent'}
-							payRent={this.payRent}
-						/>
-						<PayBank text={'Pay Bank'} payBank={this.payBank} />
-						<SmallButton text={'Pay Bank'} color={'blue'} />
-						<SmallButton text={'Pay Taxes'} color={'green'} />
-						<SmallButton text={'Pay Player'} color={'green'} />
-						<SmallButton text={'Sell Property'} color={'blue'} />
-						<SmallButton text={'Pay Utilities'} color={'blue'} />
-						<input type="number" placeholder="Dice Amount" />
-					</div>
-					<hr style={this.hrStyle} />
-					<div>
-						<p>My Properties</p>
-					</div>
-					<div style={this.content}>
-						{this.state.playerProperty.map(property => {
-							if (
-								property.Deed === 'Electric Company' ||
-								property.Deed === 'Water Works'
-							) {
-								return (
-									<UtilsPropertyCard
-										key={property.Deed}
-										property={property}
-									/>
-								);
-							}
-							if (property.Deed.includes('R.R.')) {
-								return (
-									<RRPropertyCard
-										key={property.Deed}
-										property={property}
-									/>
-								);
-							}
-							return (
-								<PropertyCard
-									key={property.Deed}
-									property={property}
-								/>
-							);
-						})}
-					</div>
-				</div>
-			</div>
-		);
-	}
 }
 
 export default PlayerInGame;

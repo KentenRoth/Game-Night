@@ -3,14 +3,16 @@ import axios from 'axios';
 
 import SmallButton from '../Buttons/SmallButton';
 import PlayerInGameCard from './PlayerInGameCard';
-import PropertyCard from './PropertyCard';
-import RRPropertyCard from './RRPropertyCard';
-import UtilsPropertyCard from './UtilsPropertyCard';
+import PayRent from './ActionSection/PayRent';
+import PropertyCard from './PropertyCards/PropertyCard';
+import RRPropertyCard from './PropertyCards/RRPropertyCard';
+import UtilsPropertyCard from './PropertyCards/UtilsPropertyCard';
 
 class PlayerInGame extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			rentAmount: 0,
 			player: {},
 			playerProperty: [],
 			allPlayers: [],
@@ -55,6 +57,11 @@ class PlayerInGame extends React.Component {
 	componentDidMount() {
 		this.props.getData();
 	}
+
+	payRent = value => {
+		console.log(value);
+		this.setState({ rentAmount: value });
+	};
 
 	content = {
 		display: 'flex',
@@ -141,7 +148,11 @@ class PlayerInGame extends React.Component {
 					<div>
 						<SmallButton text={'Buy Property'} color={'green'} />
 						<SmallButton text={'Passed Go'} color={'green'} />
-						<SmallButton text={'Pay Rent'} color={'blue'} />
+						<PayRent
+							allPlayers={this.state.allPlayers}
+							text={'Pay Rent'}
+							payRent={this.payRent}
+						/>
 						<SmallButton text={'Pay Bank'} color={'blue'} />
 						<SmallButton text={'Pay Taxes'} color={'green'} />
 						<SmallButton text={'Pay Player'} color={'green'} />

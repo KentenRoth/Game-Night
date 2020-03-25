@@ -4,6 +4,7 @@ import axios from 'axios';
 import SmallButton from '../Buttons/SmallButton';
 import PlayerInGameCard from './PlayerInGameCard';
 import PayRent from './ActionSection/PayRent';
+import PayBank from './ActionSection/PayBank';
 import PropertyCard from './PropertyCards/PropertyCard';
 import RRPropertyCard from './PropertyCards/RRPropertyCard';
 import UtilsPropertyCard from './PropertyCards/UtilsPropertyCard';
@@ -54,13 +55,17 @@ class PlayerInGame extends React.Component {
 		let array = this.props.playerData.allPlayers;
 		return (array = array.filter(player => player._id !== notPlayer));
 	};
+
 	componentDidMount() {
 		this.props.getData();
 	}
 
 	payRent = value => {
-		console.log(value);
 		this.setState({ rentAmount: value });
+	};
+
+	payBank = value => {
+		console.log(value);
 	};
 
 	content = {
@@ -153,6 +158,7 @@ class PlayerInGame extends React.Component {
 							text={'Pay Rent'}
 							payRent={this.payRent}
 						/>
+						<PayBank text={'Pay Bank'} payBank={this.payBank} />
 						<SmallButton text={'Pay Bank'} color={'blue'} />
 						<SmallButton text={'Pay Taxes'} color={'green'} />
 						<SmallButton text={'Pay Player'} color={'green'} />

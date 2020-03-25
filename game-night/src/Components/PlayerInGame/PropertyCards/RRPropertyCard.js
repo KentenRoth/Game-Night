@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MortgageButton from '../Buttons/MortgageButton';
+import MortgageButton from '../../Buttons/MortgageButton';
 
 class RRPropertyCard extends React.Component {
 	card = {

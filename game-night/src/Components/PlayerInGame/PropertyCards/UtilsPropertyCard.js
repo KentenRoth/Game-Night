@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MortgageButton from '../Buttons/MortgageButton';
+import MortgageButton from '../../Buttons/MortgageButton';
 
 class UtilsPropertyCard extends React.Component {
 	card = {

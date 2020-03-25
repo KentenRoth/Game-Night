@@ -5,9 +5,6 @@ import SmallButton from '../../Buttons/SmallButton';
 class PayRent extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			value: ''
-		};
 
 		this.payRent = this.payRent.bind(this);
 	}

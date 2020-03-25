@@ -2,9 +2,14 @@ import React from 'react';
 import axios from 'axios';
 
 import SmallButton from '../Buttons/SmallButton';
+
+// Action Section
 import PlayerInGameCard from './PlayerInGameCard';
 import PayRent from './ActionSection/PayRent';
 import PayBank from './ActionSection/PayBank';
+import PayTaxes from './ActionSection/PayTaxes';
+
+// Property Cards
 import PropertyCard from './PropertyCards/PropertyCard';
 import RRPropertyCard from './PropertyCards/RRPropertyCard';
 import UtilsPropertyCard from './PropertyCards/UtilsPropertyCard';
@@ -13,6 +18,7 @@ class PlayerInGame extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			taxes: 0,
 			rentAmount: 0,
 			player: {},
 			playerProperty: [],
@@ -35,6 +41,7 @@ class PlayerInGame extends React.Component {
 			});
 			this.nonPlayer();
 		}
+
 		return;
 	}
 
@@ -109,8 +116,14 @@ class PlayerInGame extends React.Component {
 					</div>
 					<hr style={this.hrStyle} />
 					<div>
+						<div>
+							<SmallButton text={'Passed Go'} color={'green'} />
+						</div>
 						<SmallButton text={'Buy Property'} color={'green'} />
-						<SmallButton text={'Passed Go'} color={'green'} />
+						<PayTaxes
+							text={'Pay Taxes'}
+							player={this.state.player}
+						/>
 						<div className="row">
 							<div className="col-6">
 								<PayRent
@@ -127,11 +140,9 @@ class PlayerInGame extends React.Component {
 							</div>
 						</div>
 
-						<SmallButton text={'Pay Taxes'} color={'green'} />
 						<SmallButton text={'Pay Player'} color={'green'} />
 						<SmallButton text={'Sell Property'} color={'blue'} />
 						<SmallButton text={'Pay Utilities'} color={'blue'} />
-						<input type="number" placeholder="Dice Amount" />
 					</div>
 					<hr style={this.hrStyle} />
 					<div>

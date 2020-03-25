@@ -91,7 +91,7 @@ class App extends React.Component {
 	allProperties = res => {
 		let properties = [];
 		res.data.map(player => {
-			properties.push(player.property);
+			return properties.push(player.property);
 		});
 		var merged = [].concat.apply([], properties);
 		return merged;
@@ -101,7 +101,7 @@ class App extends React.Component {
 		let netWorth = 0;
 
 		player.data.property.map(value => {
-			netWorth = value.Price + netWorth;
+			return (netWorth = value.Price + netWorth);
 		});
 		player.data.netWorth = netWorth + player.data.money;
 	};
@@ -111,9 +111,9 @@ class App extends React.Component {
 		player.data.map(getNet => {
 			netWorth = 0;
 			getNet.property.map(value => {
-				netWorth = value.Price + netWorth;
+				return (netWorth = value.Price + netWorth);
 			});
-			getNet.netWorth = netWorth + getNet.money;
+			return (getNet.netWorth = netWorth + getNet.money);
 		});
 	};
 }

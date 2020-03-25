@@ -43,7 +43,7 @@ class PlayerInGame extends React.Component {
 		var myPlayer = this.props.playerData.player._id;
 		this.props.playerData.allPlayers.map(player => {
 			if (player._id !== myPlayer) {
-				return;
+				return [];
 			}
 			return (me = player);
 		});

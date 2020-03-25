@@ -15,8 +15,9 @@ class PayRent extends React.Component {
 		const propertyArray = [];
 		this.props.allPlayers.map(player => {
 			player.property.map(property => {
-				propertyArray.push(property);
+				return propertyArray.push(property);
 			});
+			return [];
 		});
 
 		return propertyArray.map(propertyDeed => (

@@ -3,9 +3,6 @@ import React from 'react';
 import SmallButton from '../../Buttons/SmallButton';
 
 class PayBank extends React.Component {
-	constructor(props) {
-		super(props);
-	}
 	payBank = e => {
 		e.preventDefault();
 		this.props.payBank(this.refs.bank.value);

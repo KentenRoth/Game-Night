@@ -19,7 +19,6 @@ class PlayerInGame extends React.Component {
 		super(props);
 		this.state = {
 			taxes: 0,
-			rentAmount: 0,
 			player: {},
 			playerProperty: [],
 			allPlayers: [],
@@ -69,7 +68,19 @@ class PlayerInGame extends React.Component {
 
 	// Paying Rent Amount.  Needs to figure out what player to pay to
 	payRent = value => {
-		this.setState({ rentAmount: value });
+		let rentAmount = 0;
+		let playerID = '';
+		this.state.allPlayers.map(player => {
+			player.property.map(property => {
+				if (property.Deed === value) {
+					rentAmount = property.Rent;
+					return (playerID = player._id);
+				}
+				return [];
+			});
+			return [];
+		});
+		return rentAmount, playerID;
 	};
 
 	// Paying Bank a set amount.

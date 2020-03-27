@@ -20,8 +20,8 @@ class PayRent extends React.Component {
 		return propertyArray.map(propertyDeed => (
 			<option
 				key={propertyDeed.Deed}
-				value={propertyDeed.Rent}
-				id={propertyDeed.Rent}
+				value={propertyDeed.Deed}
+				name={propertyDeed.Deed}
 			>
 				{propertyDeed.Deed} ${propertyDeed.Rent}
 			</option>

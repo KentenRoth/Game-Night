@@ -8,6 +8,7 @@ import PlayerInGameCard from './PlayerInGameCard';
 import PayRent from './ActionSection/PayRent';
 import PayBank from './ActionSection/PayBank';
 import PayTaxes from './ActionSection/PayTaxes';
+import PayPlayer from './ActionSection/PayPlayer';
 
 // Property Cards
 import PropertyCard from './PropertyCards/PropertyCard';
@@ -68,19 +69,29 @@ class PlayerInGame extends React.Component {
 
 	// Paying Rent Amount.  Needs to figure out what player to pay to
 	payRent = value => {
-		let rentAmount = 0;
-		let playerID = '';
+		let pay = {
+			rentAmount: 0,
+			playerID: ''
+		};
 		this.state.allPlayers.map(player => {
 			player.property.map(property => {
 				if (property.Deed === value) {
-					rentAmount = property.Rent;
-					return (playerID = player._id);
+					pay.rentAmount = property.Rent;
+					return (pay.playerID = player._id);
 				}
 				return [];
 			});
 			return [];
 		});
-		return rentAmount, playerID;
+
+		if (pay.rentAmount > this.state.player.money) {
+			return console.log('Nope');
+		}
+		return pay;
+	};
+
+	payPlayer = value => {
+		console.log(value);
 	};
 
 	// Paying Bank a set amount.
@@ -150,7 +161,11 @@ class PlayerInGame extends React.Component {
 								/>
 							</div>
 						</div>
-
+						<PayPlayer
+							text={'Pay Player'}
+							payPlayer={this.payPlyaer}
+							players={this.state.allPlayers}
+						/>
 						<SmallButton text={'Pay Player'} color={'green'} />
 						<SmallButton text={'Sell Property'} color={'blue'} />
 						<SmallButton text={'Pay Utilities'} color={'blue'} />

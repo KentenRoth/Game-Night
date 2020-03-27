@@ -17,7 +17,7 @@ class PayTaxes extends React.Component {
 		} else {
 			taxAmount = netWorth;
 		}
-		return this.setState({ tax: taxAmount });
+		return this.setState({ tax: parseInt(taxAmount, 10) });
 	};
 
 	componentDidUpdate(prevProps) {

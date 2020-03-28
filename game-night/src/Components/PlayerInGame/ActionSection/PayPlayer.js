@@ -6,10 +6,26 @@ class PayPlayer extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+	whatPlayer = () => {
+		return this.props.allPlayers.map(player => (
+			<option key={player._id} value={player._id}>
+				{player.name}
+			</option>
+		));
+	};
+
+	payPlayer = e => {
+		let payOut = {
+			player: this.refs.player.value,
+			amount: e.target.amount.value
+		};
+		e.preventDefault();
+		this.props.payPlayer(payOut);
+	};
 
 	render() {
 		return (
-			<form>
+			<form onSubmit={this.payPlayer}>
 				<div>
 					<SmallButton
 						text={this.props.text}
@@ -17,9 +33,13 @@ class PayPlayer extends React.Component {
 						type={'submit'}
 					/>
 					<div>
-						<select ref="player"></select>
+						<select ref="player">{this.whatPlayer()}</select>
 					</div>
-					<input type="number" />
+					<input
+						name="amount"
+						type="number"
+						placeholder={'Amount to Player'}
+					/>
 				</div>
 			</form>
 		);

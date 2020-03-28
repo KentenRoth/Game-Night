@@ -162,9 +162,9 @@ class PlayerInGame extends React.Component {
 							</div>
 						</div>
 						<PayPlayer
+							allPlayers={this.state.allPlayers}
 							text={'Pay Player'}
-							payPlayer={this.payPlyaer}
-							players={this.state.allPlayers}
+							payPlayer={this.payPlayer}
 						/>
 						<SmallButton text={'Pay Player'} color={'green'} />
 						<SmallButton text={'Sell Property'} color={'blue'} />

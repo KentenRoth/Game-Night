@@ -43,9 +43,7 @@ class PayRent extends React.Component {
 						type={'submit'}
 					/>
 				</div>
-				<select ref="payment" onChange={this.propertyRent}>
-					{this.rentPayingProperty()}
-				</select>
+				<select ref="payment">{this.rentPayingProperty()}</select>
 			</form>
 		);
 	}

@@ -21,8 +21,7 @@ class PayBank extends React.Component {
 						<input
 							ref="bank"
 							type="number"
-							placeholder="Amount to bank"
-							defaultValue={0}
+							placeholder="Amount To Bank"
 						></input>
 					</div>
 				</div>

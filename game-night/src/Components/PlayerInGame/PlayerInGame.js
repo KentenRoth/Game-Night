@@ -9,6 +9,7 @@ import PayRent from './ActionSection/PayRent';
 import PayBank from './ActionSection/PayBank';
 import PayTaxes from './ActionSection/PayTaxes';
 import PayPlayer from './ActionSection/PayPlayer';
+import PayUtilities from './ActionSection/PayUtilities';
 
 // Property Cards
 import PropertyCard from './PropertyCards/PropertyCard';
@@ -90,6 +91,10 @@ class PlayerInGame extends React.Component {
 		return pay;
 	};
 
+	payUtilities = value => {
+		console.log(value);
+	};
+
 	payPlayer = value => {
 		console.log(value);
 	};
@@ -166,7 +171,11 @@ class PlayerInGame extends React.Component {
 							text={'Pay Player'}
 							payPlayer={this.payPlayer}
 						/>
-						<SmallButton text={'Pay Player'} color={'green'} />
+						<PayUtilities
+							text={'Pay Utilities'}
+							utilities={this.state.allPlayers}
+							payUtilities={this.payUtilities}
+						/>
 						<SmallButton text={'Sell Property'} color={'blue'} />
 						<SmallButton text={'Pay Utilities'} color={'blue'} />
 					</div>

@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import data from '../../Data/property.json';
 
 import SmallButton from '../Buttons/SmallButton';
 
 // Action Section
+import BuyProperty from './ActionSection/BuyProperty';
 import PlayerInGameCard from './PlayerInGameCard';
 import PayRent from './ActionSection/PayRent';
 import PayBank from './ActionSection/PayBank';
@@ -67,6 +69,17 @@ class PlayerInGame extends React.Component {
 	componentDidMount() {
 		this.props.getData();
 	}
+
+	buyProperty = value => {
+		let allProperties = data;
+		let propertyToBuy;
+		allProperties.map(property => {
+			if (property.Deed === value) {
+				return (propertyToBuy = property);
+			}
+		});
+		return propertyToBuy;
+	};
 
 	// Paying Rent Amount.  Needs to figure out what player to pay to
 	payRent = value => {
@@ -145,7 +158,13 @@ class PlayerInGame extends React.Component {
 					<div>
 						<div>
 							<SmallButton text={'Passed Go'} color={'green'} />
+							<p>Collect $200</p>
 						</div>
+						<BuyProperty
+							text={'Buy Property'}
+							properties={this.state.allPropertiesOwned}
+							BuyProperty={this.buyProperty}
+						/>
 						<SmallButton text={'Buy Property'} color={'green'} />
 						<PayTaxes
 							text={'Pay Taxes'}
@@ -166,18 +185,25 @@ class PlayerInGame extends React.Component {
 								/>
 							</div>
 						</div>
-						<PayPlayer
-							allPlayers={this.state.allPlayers}
-							text={'Pay Player'}
-							payPlayer={this.payPlayer}
-						/>
-						<PayUtilities
-							text={'Pay Utilities'}
-							utilities={this.state.allPlayers}
-							payUtilities={this.payUtilities}
-						/>
+
+						<div className="row">
+							<div className="col-6">
+								<PayPlayer
+									allPlayers={this.state.allPlayers}
+									text={'Pay Player'}
+									payPlayer={this.payPlayer}
+								/>
+							</div>
+							<div className="col-6">
+								<PayUtilities
+									text={'Pay Utilities'}
+									utilities={this.state.allPlayers}
+									payUtilities={this.payUtilities}
+								/>
+							</div>
+						</div>
+
 						<SmallButton text={'Sell Property'} color={'blue'} />
-						<SmallButton text={'Pay Utilities'} color={'blue'} />
 					</div>
 					<hr style={this.hrStyle} />
 					<div>

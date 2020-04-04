@@ -12,6 +12,7 @@ import PayBank from './ActionSection/PayBank';
 import PayTaxes from './ActionSection/PayTaxes';
 import PayPlayer from './ActionSection/PayPlayer';
 import PayUtilities from './ActionSection/PayUtilities';
+import SellProperty from './ActionSection/SellProperty';
 
 // Property Cards
 import PropertyCard from './PropertyCards/PropertyCard';
@@ -43,6 +44,7 @@ class PlayerInGame extends React.Component {
 				allPropertiesOwned: this.props.playerData.allPropertiesOwned
 			});
 			this.nonPlayer();
+			this.getPlayerData();
 		}
 
 		return;
@@ -70,6 +72,7 @@ class PlayerInGame extends React.Component {
 		this.props.getData();
 	}
 
+	// Buy Property.
 	buyProperty = value => {
 		let allProperties = data;
 		let propertyToBuy;
@@ -104,16 +107,22 @@ class PlayerInGame extends React.Component {
 		return pay;
 	};
 
+	// Needs to check to see if owner has both utilities.
 	payUtilities = value => {
 		console.log(value);
 	};
 
+	// Pay Player.  Needs to make sure $$ is entered.
 	payPlayer = value => {
 		console.log(value);
 	};
 
 	// Paying Bank a set amount.
 	payBank = value => {
+		console.log(value);
+	};
+
+	sellProperty = value => {
 		console.log(value);
 	};
 
@@ -156,29 +165,38 @@ class PlayerInGame extends React.Component {
 					</div>
 					<hr style={this.hrStyle} />
 					<div>
-						<div>
+						<div style={this.addPadding}>
 							<SmallButton text={'Passed Go'} color={'green'} />
-							<p>Collect $200</p>
+							<p style={this.textP}>
+								Collect{' '}
+								<span style={this.moneyStyle}>$200</span>
+							</p>
 						</div>
-						<BuyProperty
-							text={'Buy Property'}
-							properties={this.state.allPropertiesOwned}
-							BuyProperty={this.buyProperty}
-						/>
-						<SmallButton text={'Buy Property'} color={'green'} />
-						<PayTaxes
-							text={'Pay Taxes'}
-							player={this.state.player}
-						/>
 						<div className="row">
-							<div className="col-6">
+							<div style={this.actionArea} className="col-6">
+								<BuyProperty
+									text={'Buy Property'}
+									properties={this.state.allPropertiesOwned}
+									BuyProperty={this.buyProperty}
+								/>
+							</div>
+							<div style={this.actionArea} className="col-6">
+								<PayTaxes
+									text={'Pay Taxes'}
+									player={this.state.player}
+								/>
+							</div>
+						</div>
+
+						<div className="row">
+							<div style={this.actionArea} className="col-6">
 								<PayRent
 									allPlayers={this.state.allPlayers}
 									text={'Pay Rent'}
 									payRent={this.payRent}
 								/>
 							</div>
-							<div className="col-6">
+							<div style={this.actionArea} className="col-6">
 								<PayBank
 									text={'Pay Bank'}
 									payBank={this.payBank}
@@ -187,14 +205,14 @@ class PlayerInGame extends React.Component {
 						</div>
 
 						<div className="row">
-							<div className="col-6">
+							<div style={this.actionArea} className="col-6">
 								<PayPlayer
 									allPlayers={this.state.allPlayers}
 									text={'Pay Player'}
 									payPlayer={this.payPlayer}
 								/>
 							</div>
-							<div className="col-6">
+							<div style={this.actionArea} className="col-6">
 								<PayUtilities
 									text={'Pay Utilities'}
 									utilities={this.state.allPlayers}
@@ -202,8 +220,14 @@ class PlayerInGame extends React.Component {
 								/>
 							</div>
 						</div>
-
-						<SmallButton text={'Sell Property'} color={'blue'} />
+						<div style={this.addPadding}>
+							<SellProperty
+								text={'Sell Property'}
+								player={this.state.player}
+								otherPlayers={this.state.allPlayers}
+								sellProperty={this.sellProperty}
+							/>
+						</div>
 					</div>
 					<hr style={this.hrStyle} />
 					<div>
@@ -285,6 +309,20 @@ class PlayerInGame extends React.Component {
 		fontSize: '18px',
 		fontWeight: 'bold',
 		color: '#18AC4C'
+	};
+
+	addPadding = {
+		paddingBottom: '10px'
+	};
+
+	textP = {
+		fontSize: '18px'
+	};
+
+	actionArea = {
+		background: 'gray',
+		border: '1px solid black',
+		paddingBottom: '10px'
 	};
 }
 

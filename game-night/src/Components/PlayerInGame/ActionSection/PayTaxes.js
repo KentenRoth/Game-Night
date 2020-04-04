@@ -34,7 +34,10 @@ class PayTaxes extends React.Component {
 			<div>
 				<SmallButton text={this.props.text} color={'green'} />
 				<div>
-					<p>Tax Amount: ${this.state.tax}</p>
+					<p style={{ fontSize: '18px' }}>
+						Tax Amount:{' '}
+						<span style={{ color: 'red' }}>${this.state.tax}</span>
+					</p>
 				</div>
 			</div>
 		);

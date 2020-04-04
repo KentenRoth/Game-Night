@@ -1,5 +1,6 @@
 [
 	{
+		"id": 1,
 		"Color": "#88368D",
 		"Deed": "Mediterranean Ave.",
 		"Price": 60,
@@ -16,6 +17,7 @@
 		"Value": 1
 	},
 	{
+		"id": 2,
 		"Color": "#88368D",
 		"Deed": "Baltic Ave.",
 		"Price": 60,
@@ -32,6 +34,7 @@
 		"Value": 2
 	},
 	{
+		"id": 3,
 		"Color": "#B7DAF5",
 		"Deed": "Oriental Ave.",
 		"Price": 100,
@@ -48,6 +51,7 @@
 		"Value": 1
 	},
 	{
+		"id": 4,
 		"Color": "#B7DAF5",
 		"Deed": "Vermont Ave.",
 		"Price": 100,
@@ -64,6 +68,7 @@
 		"Value": 1
 	},
 	{
+		"id": 5,
 		"Color": "#B7DAF5",
 		"Deed": "Connecticut Ave.",
 		"Price": 120,
@@ -80,6 +85,7 @@
 		"Value": 1
 	},
 	{
+		"id": 6,
 		"Color": "#CC2086",
 		"Deed": "St. Charles Place",
 		"Price": 140,
@@ -96,6 +102,7 @@
 		"Value": 1
 	},
 	{
+		"id": 7,
 		"Color": "#CC2086",
 		"Deed": "States Ave.",
 		"Price": 140,
@@ -112,6 +119,7 @@
 		"Value": 1
 	},
 	{
+		"id": 8,
 		"Color": "#CC2086",
 		"Deed": "Virginia Ave.",
 		"Price": 160,
@@ -128,6 +136,7 @@
 		"Value": 1
 	},
 	{
+		"id": 9,
 		"Color": "#FBAA1C",
 		"Deed": "St. James Place",
 		"Price": 180,
@@ -144,6 +153,7 @@
 		"Value": 1
 	},
 	{
+		"id": 10,
 		"Color": "#FBAA1C",
 		"Deed": "Tennessee Ave.",
 		"Price": 180,
@@ -160,6 +170,7 @@
 		"Value": 1
 	},
 	{
+		"id": 11,
 		"Color": "#FBAA1C",
 		"Deed": "New York Ave.",
 		"Price": 200,
@@ -176,6 +187,7 @@
 		"Value": 1
 	},
 	{
+		"id": 12,
 		"Color": "#E73B27",
 		"Deed": "Kentucky Ave.",
 		"Price": 220,
@@ -192,6 +204,7 @@
 		"Value": 1
 	},
 	{
+		"id": 13,
 		"Color": "#E73B27",
 		"Deed": "Indiana Ave.",
 		"Price": 220,
@@ -208,6 +221,7 @@
 		"Value": 1
 	},
 	{
+		"id": 14,
 		"Color": "#E73B27",
 		"Deed": "Illinois Ave.",
 		"Price": 240,
@@ -224,6 +238,7 @@
 		"Value": 1
 	},
 	{
+		"id": 15,
 		"Color": "#FDF029",
 		"Deed": "Atlantic",
 		"Price": 260,
@@ -240,6 +255,8 @@
 		"Value": 1
 	},
 	{
+		"id": 16,
+
 		"Color": "#FDF029",
 		"Deed": "Ventnor Ave.",
 		"Price": 260,
@@ -256,6 +273,7 @@
 		"Value": 1
 	},
 	{
+		"id": 17,
 		"Color": "#FDF029",
 		"Deed": "Marvin Gardens",
 		"Price": 280,
@@ -272,6 +290,7 @@
 		"Value": 1
 	},
 	{
+		"id": 18,
 		"Color": "#18AC4C",
 		"Deed": "Pacific Ave.",
 		"Price": 300,
@@ -288,6 +307,7 @@
 		"Value": 1
 	},
 	{
+		"id": 19,
 		"Color": "#18AC4C",
 		"Deed": "North Carolina Ave.",
 		"Price": 300,
@@ -304,6 +324,7 @@
 		"Value": 1
 	},
 	{
+		"id": 20,
 		"Color": "#18AC4C",
 		"Deed": "Pennsylvania Ave.",
 		"Price": 320,
@@ -320,8 +341,9 @@
 		"Value": 1
 	},
 	{
+		"id": 21,
 		"Color": "#0F76C0",
-		"Deed": "Park Plae",
+		"Deed": "Park Place",
 		"Price": 350,
 		"Rent": 35,
 		"HouseCost": 200,
@@ -336,6 +358,7 @@
 		"Value": 1
 	},
 	{
+		"id": 22,
 		"Color": "#0F76C0",
 		"Deed": "Boardwalk",
 		"Price": 400,
@@ -352,6 +375,7 @@
 		"Value": 2
 	},
 	{
+		"id": 23,
 		"Color": "#999999",
 		"Deed": "Reading R.R.",
 		"Price": 200,
@@ -361,14 +385,17 @@
 		"Value": 1
 	},
 	{
+		"id": 24,
 		"Color": "#999999",
 		"Deed": "Pennsylvania R.R.",
 		"Price": 200,
 		"Rent": 25,
 		"Mortgage": 100,
-		"isMortgaged": false
+		"isMortgaged": false,
+		"Value": 1
 	},
 	{
+		"id": 25,
 		"Color": "#999999",
 		"Deed": "B. & O. R.R.",
 		"Price": 200,
@@ -378,6 +405,7 @@
 		"Value": 1
 	},
 	{
+		"id": 26,
 		"Color": "#999999",
 		"Deed": "Short Line R.R.",
 		"Price": 200,
@@ -387,6 +415,7 @@
 		"Value": 1
 	},
 	{
+		"id": 27,
 		"Color": "#ffffff",
 		"Deed": "Electric Company",
 		"Price": 150,
@@ -396,6 +425,7 @@
 		"Value": 1
 	},
 	{
+		"id": 28,
 		"Color": "#ffffff",
 		"Deed": "Water Works",
 		"Price": 150,

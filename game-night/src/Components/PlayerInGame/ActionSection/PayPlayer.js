@@ -3,9 +3,6 @@ import React from 'react';
 import SmallButton from '../../Buttons/SmallButton';
 
 class PayPlayer extends React.Component {
-	constructor(props) {
-		super(props);
-	}
 	whatPlayer = () => {
 		return this.props.allPlayers.map(player => (
 			<option key={player._id} value={player._id}>

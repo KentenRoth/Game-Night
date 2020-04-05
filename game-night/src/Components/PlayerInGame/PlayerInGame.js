@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import data from '../../Data/property.json';
 
 import SmallButton from '../Buttons/SmallButton';
@@ -80,6 +80,7 @@ class PlayerInGame extends React.Component {
 			if (property.Deed === value) {
 				return (propertyToBuy = property);
 			}
+			return [];
 		});
 		return propertyToBuy;
 	};

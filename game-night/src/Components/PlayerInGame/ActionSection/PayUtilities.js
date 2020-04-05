@@ -15,7 +15,9 @@ class PayUtilities extends React.Component {
 						player: player._id
 					});
 				}
+				return [];
 			});
+			return [];
 		});
 
 		return utilitiesOwned.map(property => (

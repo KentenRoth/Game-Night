@@ -3,10 +3,6 @@ import React from 'react';
 import SmallButton from '../../Buttons/SmallButton';
 
 class SellProperty extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	sellYourProperty = () => {
 		const myProperties = [];
 		if (this.props.player.property === undefined) {

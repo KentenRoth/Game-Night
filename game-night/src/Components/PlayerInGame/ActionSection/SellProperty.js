@@ -36,7 +36,7 @@ class SellProperty extends React.Component {
 		));
 	};
 
-	fixed = e => {
+	sellMyProperty = e => {
 		e.preventDefault();
 		const sellTo = {
 			selling: this.refs.yourProperty.value,
@@ -49,7 +49,7 @@ class SellProperty extends React.Component {
 
 	render() {
 		return (
-			<form onSubmit={this.fixed}>
+			<form onSubmit={this.sellMyProperty}>
 				<div>
 					<SmallButton text={this.props.text} color={'blue'} />
 

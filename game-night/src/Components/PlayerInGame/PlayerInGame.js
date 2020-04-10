@@ -2,9 +2,8 @@ import React from 'react';
 // import axios from 'axios';
 import data from '../../Data/property.json';
 
-import SmallButton from '../Buttons/SmallButton';
-
 // Action Section
+import PassedGo from './ActionSection/PassedGo';
 import BuyProperty from './ActionSection/BuyProperty';
 import PlayerInGameCard from './PlayerInGameCard';
 import PayRent from './ActionSection/PayRent';
@@ -31,7 +30,7 @@ class PlayerInGame extends React.Component {
 			playerID: localStorage.getItem('playerID'),
 			playerToken: localStorage.getItem('playerAuthToken'),
 			gameID: localStorage.getItem('gameID'),
-			gameToken: localStorage.getItem('gameAuthToken')
+			gameToken: localStorage.getItem('gameAuthToken'),
 		};
 	}
 
@@ -41,7 +40,7 @@ class PlayerInGame extends React.Component {
 				player: this.props.playerData.player,
 				playerProperty: this.props.playerData.player.property,
 				allPlayers: this.nonPlayer(),
-				allPropertiesOwned: this.props.playerData.allPropertiesOwned
+				allPropertiesOwned: this.props.playerData.allPropertiesOwned,
 			});
 			this.nonPlayer();
 			this.getPlayerData();
@@ -53,7 +52,7 @@ class PlayerInGame extends React.Component {
 	getPlayerData = () => {
 		let me;
 		var myPlayer = this.props.playerData.player._id;
-		this.props.playerData.allPlayers.map(player => {
+		this.props.playerData.allPlayers.map((player) => {
 			if (player._id !== myPlayer) {
 				return [];
 			}
@@ -65,34 +64,38 @@ class PlayerInGame extends React.Component {
 	nonPlayer = () => {
 		var notPlayer = this.props.playerData.player._id;
 		let array = this.props.playerData.allPlayers;
-		return (array = array.filter(player => player._id !== notPlayer));
+		return (array = array.filter((player) => player._id !== notPlayer));
 	};
 
 	componentDidMount() {
 		this.props.getData();
 	}
 
+	passedGo = () => {
+		console.log('Collect $200');
+	};
+
 	// Buy Property.
-	buyProperty = value => {
+	buyProperty = (value) => {
 		let allProperties = data;
 		let propertyToBuy;
-		allProperties.map(property => {
+		allProperties.map((property) => {
 			if (property.Deed === value) {
 				return (propertyToBuy = property);
 			}
 			return [];
 		});
-		return propertyToBuy;
+		return console.log(propertyToBuy);
 	};
 
 	// Paying Rent Amount.  Needs to figure out what player to pay to
-	payRent = value => {
+	payRent = (value) => {
 		let pay = {
 			rentAmount: 0,
-			playerID: ''
+			playerID: '',
 		};
-		this.state.allPlayers.map(player => {
-			player.property.map(property => {
+		this.state.allPlayers.map((player) => {
+			player.property.map((property) => {
 				if (property.Deed === value) {
 					pay.rentAmount = property.Rent;
 					return (pay.playerID = player._id);
@@ -109,21 +112,21 @@ class PlayerInGame extends React.Component {
 	};
 
 	// Needs to check to see if owner has both utilities.
-	payUtilities = value => {
+	payUtilities = (value) => {
 		console.log(value);
 	};
 
 	// Pay Player.  Needs to make sure $$ is entered.
-	payPlayer = value => {
+	payPlayer = (value) => {
 		console.log(value);
 	};
 
 	// Paying Bank a set amount.
-	payBank = value => {
+	payBank = (value) => {
 		console.log(value);
 	};
 
-	sellProperty = value => {
+	sellProperty = (value) => {
 		console.log(value);
 	};
 
@@ -132,7 +135,7 @@ class PlayerInGame extends React.Component {
 			<div style={this.container}>
 				<div className="box">
 					<div style={this.content}>
-						{this.state.allPlayers.map(player => {
+						{this.state.allPlayers.map((player) => {
 							if (this.state.player._id !== player._id) {
 								return (
 									<PlayerInGameCard
@@ -166,13 +169,11 @@ class PlayerInGame extends React.Component {
 					</div>
 					<hr style={this.hrStyle} />
 					<div>
-						<div style={this.addPadding}>
-							<SmallButton text={'Passed Go'} color={'green'} />
-							<p style={this.textP}>
-								Collect{' '}
-								<span style={this.moneyStyle}>$200</span>
-							</p>
-						</div>
+						<PassedGo
+							text={'Passed Go'}
+							collectMoney={this.passedGo}
+						/>
+
 						<div className="row">
 							<div style={this.actionArea} className="col-6">
 								<BuyProperty
@@ -235,7 +236,7 @@ class PlayerInGame extends React.Component {
 						<p>My Properties</p>
 					</div>
 					<div style={this.content}>
-						{this.state.playerProperty.map(property => {
+						{this.sortByColor().map((property) => {
 							if (
 								property.Deed === 'Electric Company' ||
 								property.Deed === 'Water Works'
@@ -268,16 +269,24 @@ class PlayerInGame extends React.Component {
 		);
 	}
 
+	sortByColor = () => {
+		const property = this.state.playerProperty;
+		property.sort(function (a, b) {
+			return a.id - b.id;
+		});
+		return property;
+	};
+
 	content = {
 		display: 'flex',
-		flexWrap: 'wrap'
+		flexWrap: 'wrap',
 	};
 
 	container = {
 		maxWidth: '600px',
 		margin: '0 auto',
 		padding: '0 1.6rem',
-		textAlign: 'center'
+		textAlign: 'center',
 	};
 
 	playerContent = {
@@ -285,12 +294,12 @@ class PlayerInGame extends React.Component {
 		border: '2px solid #B7DAF5',
 		borderRadius: '10px',
 		margin: '15px auto',
-		maxWidth: '400px'
+		maxWidth: '400px',
 	};
 
 	title = {
 		fontSize: '20px',
-		fontWeight: 'bold'
+		fontWeight: 'bold',
 	};
 
 	hrStyle = {
@@ -298,32 +307,32 @@ class PlayerInGame extends React.Component {
 		borderTop: '2px solid  #B7DAF5',
 		height: '1px',
 		margin: '2px auto',
-		width: '90%'
+		width: '90%',
 	};
 
 	moneyStyle = {
 		fontSize: '18px',
-		color: '#18f04C'
+		color: '#18f04C',
 	};
 
 	netStyle = {
 		fontSize: '18px',
 		fontWeight: 'bold',
-		color: '#18AC4C'
+		color: '#18AC4C',
 	};
 
 	addPadding = {
-		paddingBottom: '10px'
+		paddingBottom: '10px',
 	};
 
 	textP = {
-		fontSize: '18px'
+		fontSize: '18px',
 	};
 
 	actionArea = {
 		background: 'gray',
 		border: '1px solid black',
-		paddingBottom: '10px'
+		paddingBottom: '10px',
 	};
 }
 

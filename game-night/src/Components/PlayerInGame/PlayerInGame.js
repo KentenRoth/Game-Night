@@ -88,13 +88,30 @@ class PlayerInGame extends React.Component {
 	buyProperty = (value) => {
 		let allProperties = data;
 		let propertyToBuy;
+		let playerFunds = this.state.player.money;
+		let id = this.state.player._id;
+		let myProperties = this.state.playerProperty;
 		allProperties.map((property) => {
 			if (property.Deed === value) {
 				return (propertyToBuy = property);
 			}
 			return [];
 		});
-		return console.log(propertyToBuy);
+
+		if (playerFunds < propertyToBuy.Price) {
+			return console.log('Nope');
+		}
+
+		myProperties.push(propertyToBuy);
+
+		axios
+			.patch(`/ingameuser/${id}`, {
+				money: playerFunds - propertyToBuy.Price,
+				property: myProperties,
+			})
+			.then((res) => {
+				console.log(res);
+			});
 	};
 
 	// Paying Rent Amount.  Needs to figure out what player to pay to

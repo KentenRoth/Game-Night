@@ -1,5 +1,5 @@
 import React from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import data from '../../Data/property.json';
 
 // Action Section
@@ -72,7 +72,16 @@ class PlayerInGame extends React.Component {
 	}
 
 	passedGo = () => {
-		console.log('Collect $200');
+		const cash = this.state.player.money;
+		const id = this.state.player._id;
+
+		axios
+			.patch(`/ingameuser/${id}`, {
+				money: cash + 200,
+			})
+			.then((res) => {
+				console.log(res);
+			});
 	};
 
 	// Buy Property.

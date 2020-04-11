@@ -8,11 +8,11 @@ class SellProperty extends React.Component {
 		if (this.props.player.property === undefined) {
 			return [];
 		}
-		this.props.player.property.map(property => {
+		this.props.player.property.map((property) => {
 			return myProperties.push(property);
 		});
 
-		return myProperties.map(property => (
+		return myProperties.map((property) => (
 			<option key={property.Deed} value={property.Deed}>
 				{property.Deed}
 			</option>
@@ -25,19 +25,19 @@ class SellProperty extends React.Component {
 			return;
 		}
 
-		return players.map(player => (
+		return players.map((player) => (
 			<option key={player._id} value={player._id}>
 				{player.name}
 			</option>
 		));
 	};
 
-	sellMyProperty = e => {
+	sellMyProperty = (e) => {
 		e.preventDefault();
 		const sellTo = {
 			selling: this.refs.yourProperty.value,
-			buyer: this.refs.yourProperty.value,
-			amount: e.target.amount.value
+			buyer: this.refs.buyingPlayer.value,
+			amount: e.target.amount.value,
 		};
 
 		this.props.sellProperty(sellTo);

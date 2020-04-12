@@ -117,10 +117,12 @@ class PlayerInGame extends React.Component {
 	payRent = (value) => {
 		const myID = this.state.player._id;
 		const playerFunds = this.state.player.money;
+		let ownerMoney = 0;
 		let pay = {
 			rentAmount: 0,
 			playerID: '',
 		};
+
 		this.state.allPlayers.map((player) => {
 			player.property.map((property) => {
 				if (property.Deed === value) {
@@ -135,7 +137,6 @@ class PlayerInGame extends React.Component {
 		if (pay.rentAmount > this.state.player.money) {
 			return console.log('Nope');
 		}
-		let ownerMoney = 0;
 
 		this.state.allPlayers.find((player) => {
 			if (player._id === pay.playerID) {
@@ -178,13 +179,37 @@ class PlayerInGame extends React.Component {
 			});
 	};
 
-	// Needs to check to see if owner has both utilities.
-	payUtilities = (value) => {
-		console.log(value);
-	};
-
 	// Pay Player.  Needs to make sure $$ is entered.
 	payPlayer = (value) => {
+		const playerFunds = this.state.player.money;
+		const myID = this.state.player._id;
+		let playerGettingPaid = 0;
+		const paidAmount = parseInt(value.amount);
+
+		this.state.allPlayers.find((player) => {
+			if (player._id === value.player) {
+				return (playerGettingPaid = player.money);
+			}
+			return playerGettingPaid;
+		});
+
+		if (Number.isNaN(paidAmount) === true) {
+			return;
+		}
+
+		axios
+			.patch(`/ingameuser/${myID}`, {
+				money: playerFunds - value.amount,
+			})
+			.then((res) => {
+				axios.patch(`/ingameuser/${value.player}`, {
+					money: parseInt(value.amount) + playerGettingPaid,
+				});
+			});
+	};
+
+	// Needs to check to see if owner has both utilities.
+	payUtilities = (value) => {
 		console.log(value);
 	};
 

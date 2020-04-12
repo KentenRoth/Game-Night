@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import SmallButton from '../../Buttons/SmallButton';
 
@@ -29,9 +30,21 @@ class PayTaxes extends React.Component {
 		}
 	}
 
+	payTaxes = (e) => {
+		const myID = this.props.player._id;
+		const myFunds = this.props.player.money;
+		e.preventDefault();
+		if (this.state.tax > myFunds) {
+			return;
+		}
+		axios.patch(`/ingameuser/${myID}`, {
+			money: myFunds - this.state.tax,
+		});
+	};
+
 	render() {
 		return (
-			<div>
+			<form onSubmit={this.payTaxes}>
 				<SmallButton text={this.props.text} color={'green'} />
 				<div>
 					<p style={{ fontSize: '18px' }}>
@@ -39,7 +52,7 @@ class PayTaxes extends React.Component {
 						<span style={{ color: 'red' }}>${this.state.tax}</span>
 					</p>
 				</div>
-			</div>
+			</form>
 		);
 	}
 }

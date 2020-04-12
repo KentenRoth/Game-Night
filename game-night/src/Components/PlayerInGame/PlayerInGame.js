@@ -116,6 +116,8 @@ class PlayerInGame extends React.Component {
 
 	// Paying Rent Amount.  Needs to figure out what player to pay to
 	payRent = (value) => {
+		const myID = this.state.player._id;
+		const playerFunds = this.state.player.money;
 		let pay = {
 			rentAmount: 0,
 			playerID: '',
@@ -134,7 +136,23 @@ class PlayerInGame extends React.Component {
 		if (pay.rentAmount > this.state.player.money) {
 			return console.log('Nope');
 		}
-		return pay;
+		let ownerMoney = 0;
+
+		this.state.allPlayers.find((player) => {
+			if (player._id === pay.playerID) {
+				return (ownerMoney = player.money);
+			}
+			return ownerMoney;
+		});
+		axios
+			.patch(`/ingameuser/${myID}`, {
+				money: playerFunds - pay.rentAmount,
+			})
+			.then((res) => {
+				axios.patch(`/ingameuser/${pay.playerID}`, {
+					money: ownerMoney + pay.rentAmount,
+				});
+			});
 	};
 
 	// Needs to check to see if owner has both utilities.

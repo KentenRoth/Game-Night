@@ -114,7 +114,6 @@ class PlayerInGame extends React.Component {
 			});
 	};
 
-	// Paying Rent Amount.  Needs to figure out what player to pay to
 	payRent = (value) => {
 		const myID = this.state.player._id;
 		const playerFunds = this.state.player.money;
@@ -155,6 +154,30 @@ class PlayerInGame extends React.Component {
 			});
 	};
 
+	// Paying Bank a set amount.
+	payBank = (value) => {
+		const playerFunds = this.state.player.money;
+		const playerID = this.state.player._id;
+		if (value === '') {
+			return;
+		}
+		if (value > playerFunds) {
+			return console.log('Nope');
+		}
+
+		if (value < 0) {
+			return;
+		}
+
+		axios
+			.patch(`/ingameuser/${playerID}`, {
+				money: playerFunds - value,
+			})
+			.then((res) => {
+				console.log(res);
+			});
+	};
+
 	// Needs to check to see if owner has both utilities.
 	payUtilities = (value) => {
 		console.log(value);
@@ -162,11 +185,6 @@ class PlayerInGame extends React.Component {
 
 	// Pay Player.  Needs to make sure $$ is entered.
 	payPlayer = (value) => {
-		console.log(value);
-	};
-
-	// Paying Bank a set amount.
-	payBank = (value) => {
 		console.log(value);
 	};
 

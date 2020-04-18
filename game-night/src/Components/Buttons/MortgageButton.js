@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MortgageButton = props => {
+const MortgageButton = (props) => {
 	const isButtonDisabled = () => {
 		if (props.text === 'Buy House' && props.CanBuyHouse === false) {
 			return {
@@ -14,7 +14,7 @@ const MortgageButton = props => {
 				letterSpacing: '0.1em',
 				margin: '10px auto',
 				padding: '2px',
-				width: '150px'
+				width: '150px',
 			};
 		} else {
 			return {
@@ -27,7 +27,7 @@ const MortgageButton = props => {
 				letterSpacing: '0.1em',
 				margin: '10px auto',
 				padding: '2px',
-				width: '150px'
+				width: '150px',
 			};
 		}
 	};
@@ -39,6 +39,10 @@ const MortgageButton = props => {
 		return;
 	};
 
+	const letsGetMoreMoney = (e) => {
+		console.log(props.property);
+	};
+
 	return (
 		<button
 			type={props.type}
@@ -47,6 +51,7 @@ const MortgageButton = props => {
 			token={props.token}
 			gameid={props.gameid}
 			disabled={disabledButton()}
+			onClick={letsGetMoreMoney}
 		>
 			{props.text}
 		</button>

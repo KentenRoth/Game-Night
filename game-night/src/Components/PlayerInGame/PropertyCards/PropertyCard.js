@@ -9,7 +9,7 @@ class PropertyCard extends React.Component {
 		border: '1px solid black',
 		padding: '10px',
 		margin: '10px',
-		width: '170px'
+		width: '170px',
 	};
 
 	colorBox = {
@@ -17,7 +17,7 @@ class PropertyCard extends React.Component {
 		border: '1px solid black',
 		height: '50px',
 		margin: 'auto',
-		width: '150px'
+		width: '150px',
 	};
 
 	render() {

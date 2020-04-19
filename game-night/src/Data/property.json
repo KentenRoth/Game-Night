@@ -419,7 +419,7 @@
 		"Color": "#ffffff",
 		"Deed": "Electric Company",
 		"Price": 150,
-		"Rent": "Amount",
+		"Rent": 4,
 		"Mortgage": 75,
 		"isMortgaged": false,
 		"Value": 1
@@ -429,7 +429,7 @@
 		"Color": "#ffffff",
 		"Deed": "Water Works",
 		"Price": 150,
-		"Rent": "Amount",
+		"Rent": 4,
 		"Mortgage": 75,
 		"isMortgaged": false,
 		"Value": 1

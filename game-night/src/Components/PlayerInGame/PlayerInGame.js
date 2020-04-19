@@ -85,6 +85,9 @@ class PlayerInGame extends React.Component {
 	};
 
 	// Buy Property.
+	// Need check for #88368D
+	// Need check for #0F76C0
+	// Need check for #999999
 	buyProperty = (value) => {
 		let allProperties = data;
 		let propertyToBuy;
@@ -108,8 +111,7 @@ class PlayerInGame extends React.Component {
 			return property.Color === propertyToBuy.Color;
 		});
 
-		console.log(doIOwnAllColors[0].Color);
-
+		// Checking if all Utilties are owned
 		if (
 			doIOwnAllColors.length === 2 &&
 			doIOwnAllColors[0].Color === '#ffffff'
@@ -135,6 +137,7 @@ class PlayerInGame extends React.Component {
 				});
 		}
 
+		// Checking if basic property of 3 is owned
 		if (doIOwnAllColors.length === 3) {
 			let ownAllPropertyColor = [];
 			this.state.playerProperty.filter(function (property) {
@@ -233,7 +236,6 @@ class PlayerInGame extends React.Component {
 			});
 	};
 
-	// Pay Player.  Needs to make sure $$ is entered.
 	payPlayer = (value) => {
 		const playerFunds = this.state.player.money;
 		const myID = this.state.player._id;
@@ -262,11 +264,12 @@ class PlayerInGame extends React.Component {
 			});
 	};
 
-	// Needs to check to see if owner has both utilities.
+	// Needs to pay person that owns property correct amount
 	payUtilities = (value) => {
 		console.log(value);
 	};
 
+	// Selling selected property to selected player for entered amount
 	sellProperty = (value) => {
 		console.log(value);
 	};

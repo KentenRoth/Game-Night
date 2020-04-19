@@ -108,13 +108,40 @@ class PlayerInGame extends React.Component {
 			return property.Color === propertyToBuy.Color;
 		});
 
+		console.log(doIOwnAllColors[0].Color);
+
+		if (
+			doIOwnAllColors.length === 2 &&
+			doIOwnAllColors[0].Color === '#ffffff'
+		) {
+			let allProperties = [];
+			this.state.playerProperty.filter(function (property) {
+				if (property.Color !== '#ffffff') {
+					return allProperties.push(property);
+				}
+				return allProperties;
+			});
+			doIOwnAllColors.map((property) => {
+				property.Rent = 10;
+				return allProperties.push(property);
+			});
+			return axios
+				.patch(`/ingameuser/${id}`, {
+					money: playerFunds - propertyToBuy.Price,
+					property: myProperties,
+				})
+				.then((res) => {
+					console.log(res);
+				});
+		}
+
 		if (doIOwnAllColors.length === 3) {
 			let ownAllPropertyColor = [];
 			this.state.playerProperty.filter(function (property) {
 				if (property.Color !== doIOwnAllColors[0].Color) {
-					console.log(property);
 					return ownAllPropertyColor.push(property);
 				}
+				return ownAllPropertyColor;
 			});
 			doIOwnAllColors.map((property) => {
 				property.CanBuyHouse = true;

@@ -14,7 +14,8 @@
 		"Mortgage": 30,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 2,
@@ -31,7 +32,8 @@
 		"Mortgage": 30,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 3,
@@ -48,7 +50,8 @@
 		"Mortgage": 50,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 4,
@@ -65,7 +68,8 @@
 		"Mortgage": 50,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 5,
@@ -82,7 +86,8 @@
 		"Mortgage": 60,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 6,
@@ -99,7 +104,8 @@
 		"Mortgage": 70,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 7,
@@ -116,7 +122,8 @@
 		"Mortgage": 70,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 8,
@@ -133,7 +140,8 @@
 		"Mortgage": 80,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 9,
@@ -150,7 +158,8 @@
 		"Mortgage": 90,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 10,
@@ -167,7 +176,8 @@
 		"Mortgage": 90,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 11,
@@ -184,7 +194,8 @@
 		"Mortgage": 100,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 12,
@@ -201,7 +212,8 @@
 		"Mortgage": 110,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 13,
@@ -218,7 +230,8 @@
 		"Mortgage": 110,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 14,
@@ -235,7 +248,8 @@
 		"Mortgage": 120,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 15,
@@ -252,7 +266,8 @@
 		"Mortgage": 130,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 16,
@@ -269,7 +284,8 @@
 		"Mortgage": 130,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 17,
@@ -286,7 +302,8 @@
 		"Mortgage": 140,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 18,
@@ -303,7 +320,8 @@
 		"Mortgage": 150,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 19,
@@ -320,7 +338,8 @@
 		"Mortgage": 150,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 20,
@@ -337,7 +356,8 @@
 		"Mortgage": 160,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 21,
@@ -354,7 +374,8 @@
 		"Mortgage": 175,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 22,
@@ -371,7 +392,8 @@
 		"Mortgage": 200,
 		"IsMortgaged": false,
 		"CanBuyHouse": false,
-		"House": 0
+		"House": 0,
+		"OwnsAll": false
 	},
 	{
 		"id": 23,
@@ -380,7 +402,8 @@
 		"Price": 200,
 		"Rent": 25,
 		"Mortgage": 100,
-		"isMortgaged": false
+		"isMortgaged": false,
+		"OwnsAll": false
 	},
 	{
 		"id": 24,
@@ -389,7 +412,8 @@
 		"Price": 200,
 		"Rent": 25,
 		"Mortgage": 100,
-		"isMortgaged": false
+		"isMortgaged": false,
+		"OwnsAll": false
 	},
 	{
 		"id": 25,
@@ -398,7 +422,8 @@
 		"Price": 200,
 		"Rent": 25,
 		"Mortgage": 100,
-		"isMortgaged": false
+		"isMortgaged": false,
+		"OwnsAll": false
 	},
 	{
 		"id": 26,
@@ -407,7 +432,8 @@
 		"Price": 200,
 		"Rent": 25,
 		"Mortgage": 100,
-		"isMortgaged": false
+		"isMortgaged": false,
+		"OwnsAll": false
 	},
 	{
 		"id": 27,
@@ -416,7 +442,8 @@
 		"Price": 150,
 		"Rent": 4,
 		"Mortgage": 75,
-		"isMortgaged": false
+		"isMortgaged": false,
+		"OwnsAll": false
 	},
 	{
 		"id": 28,
@@ -425,6 +452,7 @@
 		"Price": 150,
 		"Rent": 4,
 		"Mortgage": 75,
-		"isMortgaged": false
+		"isMortgaged": false,
+		"OwnsAll": false
 	}
 ]

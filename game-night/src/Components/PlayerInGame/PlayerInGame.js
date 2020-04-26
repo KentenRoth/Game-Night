@@ -271,7 +271,53 @@ class PlayerInGame extends React.Component {
 
 	// Selling selected property to selected player for entered amount
 	sellProperty = (value) => {
-		console.log(value);
+		const myID = this.state.player._id;
+		const myCash = this.state.player.money;
+		const myNewPropertyList = [];
+		let soldProperty;
+
+		const playerGettingProperty = this.state.allPlayers.find((player) => {
+			return player._id === value.buyer;
+		});
+
+		const amountPaying = parseInt(value.amount);
+		const propertySold = value.selling;
+		const sellerNewPropertyList = [];
+		const buyerID = playerGettingProperty._id;
+		let buyingPayerCurrentCash = playerGettingProperty.money;
+
+		this.state.playerProperty.find((property) => {
+			if (property.Deed !== propertySold) {
+				myNewPropertyList.push(property);
+			}
+			if (property.Deed === propertySold) {
+				soldProperty = property;
+			}
+			return [];
+		});
+
+		this.state.playerProperty.filter((property) => {
+			if (property.Deed !== propertySold) {
+				return sellerNewPropertyList.push(property);
+			}
+			return [];
+		});
+
+		const buyerNewPropertyList = playerGettingProperty.property.concat(
+			soldProperty
+		);
+
+		axios
+			.patch(`/ingameuser/${myID}`, {
+				money: myCash + amountPaying,
+				property: myNewPropertyList,
+			})
+			.then(
+				axios.patch(`/ingameuser/${buyerID}`, {
+					money: buyingPayerCurrentCash - amountPaying,
+					property: buyerNewPropertyList,
+				})
+			);
 	};
 
 	render() {

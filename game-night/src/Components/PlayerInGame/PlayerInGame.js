@@ -280,7 +280,7 @@ class PlayerInGame extends React.Component {
 			return player._id === value.buyer;
 		});
 
-		const amountPaying = parseInt(value.amount);
+		let amountPaying = parseInt(value.amount);
 		const propertySold = value.selling;
 		const sellerNewPropertyList = [];
 		const buyerID = playerGettingProperty._id;
@@ -293,7 +293,7 @@ class PlayerInGame extends React.Component {
 			if (property.Deed === propertySold) {
 				soldProperty = property;
 			}
-			return [];
+			return null;
 		});
 
 		this.state.playerProperty.filter((property) => {
@@ -306,6 +306,10 @@ class PlayerInGame extends React.Component {
 		const buyerNewPropertyList = playerGettingProperty.property.concat(
 			soldProperty
 		);
+
+		if (Number.isNaN(amountPaying) === true) {
+			amountPaying = 0;
+		}
 
 		axios
 			.patch(`/ingameuser/${myID}`, {

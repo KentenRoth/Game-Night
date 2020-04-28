@@ -266,7 +266,11 @@ class PlayerInGame extends React.Component {
 
 	// Needs to pay person that owns property correct amount
 	payUtilities = (value) => {
-		console.log(value);
+		let amountPayed = value.diceAmount * value.multiplyBy;
+		if (value.diceAmount > 12) {
+			return console.log('Nope');
+		}
+		console.log(amountPayed);
 	};
 
 	// Selling selected property to selected player for entered amount

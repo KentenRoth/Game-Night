@@ -266,10 +266,32 @@ class PlayerInGame extends React.Component {
 
 	// Needs to pay person that owns property correct amount
 	payUtilities = (value) => {
+		const myID = this.state.player._id;
+		const playerFunds = this.state.player.money;
 		let amountPayed = value.diceAmount * value.multiplyBy;
+		let playerGettingPaid = 0;
 		if (value.diceAmount > 12) {
 			return console.log('Nope');
 		}
+
+		this.state.allPlayers.find((player) => {
+			if (player._id === value.userID) {
+				return (playerGettingPaid = player.money);
+			}
+			return playerGettingPaid;
+		});
+
+		axios
+			.patch(`/ingameuser/${myID}`, {
+				money: playerFunds - amountPayed,
+			})
+			.then(
+				axios.patch(`/ingameuser/${value.userID}`, {
+					money: playerGettingPaid + amountPayed,
+				})
+			);
+
+		console.log(value);
 		console.log(amountPayed);
 	};
 
@@ -326,6 +348,10 @@ class PlayerInGame extends React.Component {
 					property: buyerNewPropertyList,
 				})
 			);
+	};
+
+	ownsAllProperty = () => {
+		console.log('function');
 	};
 
 	render() {

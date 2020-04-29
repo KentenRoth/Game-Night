@@ -85,9 +85,8 @@ class PlayerInGame extends React.Component {
 	};
 
 	// Buy Property.
-	// Need check for #88368D
-	// Need check for #0F76C0
-	// Need check for #999999
+	// Need check for #88368D Purple
+	// Need check for #0F76C0 Dark Blue
 	buyProperty = (value) => {
 		let allProperties = data;
 		let propertyToBuy;
@@ -110,6 +109,51 @@ class PlayerInGame extends React.Component {
 		let doIOwnAllColors = myProperties.filter(function (property) {
 			return property.Color === propertyToBuy.Color;
 		});
+
+		if (doIOwnAllColors[0].Color === '#999999') {
+			let allProperties = [];
+			this.state.playerProperty.filter((property) => {
+				if (property.Color !== '#999999') {
+					return allProperties.push(property);
+				}
+				if (doIOwnAllColors.length === 2) {
+					doIOwnAllColors.map((property) => {
+						if (property.Rent === 50) {
+							return;
+						}
+						property.Rent = 50;
+						return allProperties.push(property);
+					});
+				} else if (doIOwnAllColors.length === 3) {
+					doIOwnAllColors.map((property) => {
+						if (property.Rent === 100) {
+							return;
+						}
+						property.Rent = 100;
+						return allProperties.push(property);
+					});
+				} else if (doIOwnAllColors.length === 4) {
+					doIOwnAllColors.map((property) => {
+						if (property.Rent === 200) {
+							return;
+						}
+						property.Rent = 200;
+						return allProperties.push(property);
+					});
+				} else {
+					allProperties.push(doIOwnAllColors[0]);
+				}
+				return allProperties;
+			});
+			return axios
+				.patch(`/ingameuser/${id}`, {
+					money: playerFunds - propertyToBuy.Price,
+					property: myProperties,
+				})
+				.then((res) => {
+					console.log(res);
+				});
+		}
 
 		// Checking if all Utilties are owned
 		if (
@@ -270,7 +314,7 @@ class PlayerInGame extends React.Component {
 		const playerFunds = this.state.player.money;
 		let amountPayed = value.diceAmount * value.multiplyBy;
 		let playerGettingPaid = 0;
-		if (value.diceAmount > 12) {
+		if (value.diceAmount > 12 && value.diceAmount < 0) {
 			return console.log('Nope');
 		}
 
@@ -290,9 +334,6 @@ class PlayerInGame extends React.Component {
 					money: playerGettingPaid + amountPayed,
 				})
 			);
-
-		console.log(value);
-		console.log(amountPayed);
 	};
 
 	// Selling selected property to selected player for entered amount
@@ -348,10 +389,6 @@ class PlayerInGame extends React.Component {
 					property: buyerNewPropertyList,
 				})
 			);
-	};
-
-	ownsAllProperty = () => {
-		console.log('function');
 	};
 
 	render() {

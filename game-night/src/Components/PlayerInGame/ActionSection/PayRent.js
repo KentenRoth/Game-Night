@@ -8,16 +8,18 @@ class PayRent extends React.Component {
 
 		this.payRent = this.payRent.bind(this);
 	}
+
+	// if not mortgaged, owns all, and 0 houses rent is double.
 	rentPayingProperty = () => {
 		const propertyArray = [];
-		this.props.allPlayers.map(player => {
-			player.property.map(property => {
+		this.props.allPlayers.map((player) => {
+			player.property.map((property) => {
 				return propertyArray.push(property);
 			});
 			return [];
 		});
 
-		return propertyArray.map(propertyDeed => (
+		return propertyArray.map((propertyDeed) => (
 			<option
 				key={propertyDeed.Deed}
 				value={propertyDeed.Deed}
@@ -28,7 +30,7 @@ class PayRent extends React.Component {
 		));
 	};
 
-	payRent = e => {
+	payRent = (e) => {
 		e.preventDefault();
 		this.props.payRent(this.refs.payment.value);
 	};

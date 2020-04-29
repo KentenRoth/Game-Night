@@ -110,6 +110,7 @@ class PlayerInGame extends React.Component {
 			return property.Color === propertyToBuy.Color;
 		});
 
+		// Checking if all RR are owned
 		if (doIOwnAllColors[0].Color === '#999999') {
 			let allProperties = [];
 			this.state.playerProperty.filter((property) => {

@@ -84,9 +84,6 @@ class PlayerInGame extends React.Component {
 			});
 	};
 
-	// Buy Property.
-	// Need check for #88368D Purple
-	// Need check for #0F76C0 Dark Blue
 	buyProperty = (value) => {
 		let allProperties = data;
 		let propertyToBuy;
@@ -120,7 +117,7 @@ class PlayerInGame extends React.Component {
 				if (doIOwnAllColors.length === 2) {
 					doIOwnAllColors.map((property) => {
 						if (property.Rent === 50) {
-							return;
+							return null;
 						}
 						property.Rent = 50;
 						return allProperties.push(property);
@@ -128,7 +125,7 @@ class PlayerInGame extends React.Component {
 				} else if (doIOwnAllColors.length === 3) {
 					doIOwnAllColors.map((property) => {
 						if (property.Rent === 100) {
-							return;
+							return null;
 						}
 						property.Rent = 100;
 						return allProperties.push(property);
@@ -136,7 +133,7 @@ class PlayerInGame extends React.Component {
 				} else if (doIOwnAllColors.length === 4) {
 					doIOwnAllColors.map((property) => {
 						if (property.Rent === 200) {
-							return;
+							return null;
 						}
 						property.Rent = 200;
 						return allProperties.push(property);
@@ -170,6 +167,58 @@ class PlayerInGame extends React.Component {
 			});
 			doIOwnAllColors.map((property) => {
 				property.Rent = 10;
+				return allProperties.push(property);
+			});
+			return axios
+				.patch(`/ingameuser/${id}`, {
+					money: playerFunds - propertyToBuy.Price,
+					property: myProperties,
+				})
+				.then((res) => {
+					console.log(res);
+				});
+		}
+
+		// Checking if all Dark Blue are owned
+		if (
+			doIOwnAllColors.length === 2 &&
+			doIOwnAllColors[0].Color === '#0F76C0'
+		) {
+			let allProperties = [];
+			this.state.playerProperty.filter(function (property) {
+				if (property.Color !== '#0F76C0') {
+					return allProperties.push(property);
+				}
+				return allProperties;
+			});
+			doIOwnAllColors.map((property) => {
+				property.Rent = property.Rent * 2;
+				return allProperties.push(property);
+			});
+			return axios
+				.patch(`/ingameuser/${id}`, {
+					money: playerFunds - propertyToBuy.Price,
+					property: myProperties,
+				})
+				.then((res) => {
+					console.log(res);
+				});
+		}
+
+		// Checking if all Purple are owned
+		if (
+			doIOwnAllColors.length === 2 &&
+			doIOwnAllColors[0].Color === '#88368D'
+		) {
+			let allProperties = [];
+			this.state.playerProperty.filter(function (property) {
+				if (property.Color !== '#88368D') {
+					return allProperties.push(property);
+				}
+				return allProperties;
+			});
+			doIOwnAllColors.map((property) => {
+				property.Rent = property.Rent * 2;
 				return allProperties.push(property);
 			});
 			return axios

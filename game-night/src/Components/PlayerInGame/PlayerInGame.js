@@ -84,6 +84,13 @@ class PlayerInGame extends React.Component {
 			});
 	};
 
+	// Owning all properties needs moved from buyProperty
+	// If property is sold and all owned needs to check
+	// If property bought from another player.  This needs check to see if collection is completed
+	ownAllProperties = () => {
+		console.log('I own all these');
+	};
+
 	buyProperty = (value) => {
 		let allProperties = data;
 		let propertyToBuy;

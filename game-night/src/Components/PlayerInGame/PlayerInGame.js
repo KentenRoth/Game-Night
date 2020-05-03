@@ -89,6 +89,7 @@ class PlayerInGame extends React.Component {
 	// If property bought from another player.  This needs check to see if collection is completed
 	ownAllProperties = (value) => {
 		let myProperties = this.state.playerProperty;
+		let myID = this.state.player._id;
 		let myNewProperties = [];
 
 		if (myProperties.length === 0) {
@@ -110,6 +111,9 @@ class PlayerInGame extends React.Component {
 		if (doIOwnAllColors[0].Color === '#88368D') {
 			if (doIOwnAllColors.length === 2) {
 				doIOwnAllColors.map((property) => {
+					if (property.OwnsAll === true) {
+						return null;
+					}
 					property.CanBuyHouse = true;
 					property.OwnsAll = true;
 					return myNewProperties.push(property);
@@ -123,7 +127,7 @@ class PlayerInGame extends React.Component {
 		if (doIOwnAllColors[0].Color === '#0F76C0') {
 			if (doIOwnAllColors.length === 2) {
 				doIOwnAllColors.map((property) => {
-					property.canBuyHouse = true;
+					property.CanBuyHouse = true;
 					property.OwnsAll = true;
 					return myNewProperties.push(property);
 				});
@@ -175,33 +179,49 @@ class PlayerInGame extends React.Component {
 			}
 		}
 
+		console.log();
+
 		// Checks basic properties
-		if (doIOwnAllColors.length === 3) {
-			doIOwnAllColors.map((property) => {
-				property.CanBuyHouse = true;
-				property.OwnsAll = true;
-				return myNewProperties.push(property);
-			});
-		} else {
-			doIOwnAllColors.map((property) => {
-				return myNewProperties.push(property);
-			});
+
+		if (
+			doIOwnAllColors[0].Color !== '#88368D' &&
+			doIOwnAllColors[0].Color !== '#0F76C0' &&
+			doIOwnAllColors[0].Color !== '#ffffff' &&
+			doIOwnAllColors[0].Color !== '#999999'
+		) {
+			if (doIOwnAllColors.length === 3) {
+				doIOwnAllColors.map((property) => {
+					property.CanBuyHouse = true;
+					property.OwnsAll = true;
+					return myNewProperties.push(property);
+				});
+			} else {
+				doIOwnAllColors.map((property) => {
+					return myNewProperties.push(property);
+				});
+			}
+
+			if (doIOwnAllColors.length === 3) {
+				let ownAllPropertyColor = [];
+				this.state.playerProperty.filter(function (property) {
+					if (property.Color !== doIOwnAllColors[0].Color) {
+						return ownAllPropertyColor.push(property);
+					}
+					return ownAllPropertyColor;
+				});
+				doIOwnAllColors.map((property) => {
+					property.CanBuyHouse = true;
+					property.Rent = property.Rent * 2;
+					return ownAllPropertyColor.push(property);
+				});
+			}
 		}
 
-		if (doIOwnAllColors.length === 3) {
-			let ownAllPropertyColor = [];
-			this.state.playerProperty.filter(function (property) {
-				if (property.Color !== doIOwnAllColors[0].Color) {
-					return ownAllPropertyColor.push(property);
-				}
-				return ownAllPropertyColor;
-			});
-			doIOwnAllColors.map((property) => {
-				property.CanBuyHouse = true;
-				property.Rent = property.Rent * 2;
-				return ownAllPropertyColor.push(property);
-			});
-		}
+		console.log(myNewProperties);
+
+		axios.patch(`/ingameuser/${myID}`, {
+			property: myNewProperties,
+		});
 	};
 
 	buyProperty = (value) => {
@@ -223,119 +243,13 @@ class PlayerInGame extends React.Component {
 
 		myProperties.push(propertyToBuy);
 
-		let doIOwnAllColors = myProperties.filter(function (property) {
-			return property.Color === propertyToBuy.Color;
-		});
-
-		// Checking if all Utilties are owned
-		if (
-			doIOwnAllColors.length === 2 &&
-			doIOwnAllColors[0].Color === '#ffffff'
-		) {
-			let allProperties = [];
-			this.state.playerProperty.filter(function (property) {
-				if (property.Color !== '#ffffff') {
-					return allProperties.push(property);
-				}
-				return allProperties;
-			});
-			doIOwnAllColors.map((property) => {
-				property.Rent = 10;
-				return allProperties.push(property);
-			});
-			return axios
-				.patch(`/ingameuser/${id}`, {
-					money: playerFunds - propertyToBuy.Price,
-					property: myProperties,
-				})
-				.then((res) => {
-					console.log(res);
-				});
-		}
-
-		// Checking if all Dark Blue are owned
-		if (
-			doIOwnAllColors.length === 2 &&
-			doIOwnAllColors[0].Color === '#0F76C0'
-		) {
-			let allProperties = [];
-			this.state.playerProperty.filter(function (property) {
-				if (property.Color !== '#0F76C0') {
-					return allProperties.push(property);
-				}
-				return allProperties;
-			});
-			doIOwnAllColors.map((property) => {
-				property.Rent = property.Rent * 2;
-				return allProperties.push(property);
-			});
-			return axios
-				.patch(`/ingameuser/${id}`, {
-					money: playerFunds - propertyToBuy.Price,
-					property: myProperties,
-				})
-				.then((res) => {
-					console.log(res);
-				});
-		}
-
-		// Checking if all Purple are owned
-		if (
-			doIOwnAllColors.length === 2 &&
-			doIOwnAllColors[0].Color === '#88368D'
-		) {
-			let allProperties = [];
-			this.state.playerProperty.filter(function (property) {
-				if (property.Color !== '#88368D') {
-					return allProperties.push(property);
-				}
-				return allProperties;
-			});
-			doIOwnAllColors.map((property) => {
-				property.Rent = property.Rent * 2;
-				return allProperties.push(property);
-			});
-			return axios
-				.patch(`/ingameuser/${id}`, {
-					money: playerFunds - propertyToBuy.Price,
-					property: myProperties,
-				})
-				.then((res) => {
-					console.log(res);
-				});
-		}
-
-		// Checking if basic property of 3 is owned
-		if (doIOwnAllColors.length === 3) {
-			let ownAllPropertyColor = [];
-			this.state.playerProperty.filter(function (property) {
-				if (property.Color !== doIOwnAllColors[0].Color) {
-					return ownAllPropertyColor.push(property);
-				}
-				return ownAllPropertyColor;
-			});
-			doIOwnAllColors.map((property) => {
-				property.CanBuyHouse = true;
-				property.Rent = property.Rent * 2;
-				return ownAllPropertyColor.push(property);
-			});
-			return axios
-				.patch(`/ingameuser/${id}`, {
-					money: playerFunds - propertyToBuy.Price,
-					property: myProperties,
-				})
-				.then((res) => {
-					console.log(res);
-				});
-		}
-
 		axios
 			.patch(`/ingameuser/${id}`, {
 				money: playerFunds - propertyToBuy.Price,
 				property: myProperties,
 			})
 			.then((res) => {
-				console.log(res);
+				this.ownAllProperties(propertyToBuy.Color);
 			});
 	};
 

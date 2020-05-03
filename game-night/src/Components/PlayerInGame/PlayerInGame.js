@@ -87,8 +87,53 @@ class PlayerInGame extends React.Component {
 	// Owning all properties needs moved from buyProperty
 	// If property is sold and all owned needs to check
 	// If property bought from another player.  This needs check to see if collection is completed
-	ownAllProperties = () => {
-		console.log('I own all these');
+	ownAllProperties = (value) => {
+		let myProperties = this.state.playerProperty;
+		let myNewProperties = [];
+
+		if (myProperties.length === 0) {
+			return null;
+		}
+
+		let doIOwnAllColors = myProperties.filter((property) => {
+			return value === property.Color;
+		});
+
+		myProperties.filter((property) => {
+			if (property.Color !== value) {
+				return myNewProperties.push(property);
+			}
+		});
+		if (doIOwnAllColors[0].Color === '#999999') {
+			if (doIOwnAllColors.length === 2) {
+				doIOwnAllColors.map((property) => {
+					if (property.Rent === 50) {
+						return myNewProperties.push(property);
+					}
+					property.Rent = 50;
+					return myNewProperties.push(property);
+				});
+			} else if (doIOwnAllColors.length === 3) {
+				doIOwnAllColors.map((property) => {
+					if (property.Rent === 100) {
+						return myNewProperties.push(property);
+					}
+					property.Rent = 100;
+					return myNewProperties.push(property);
+				});
+			} else if (doIOwnAllColors.length === 4) {
+				doIOwnAllColors.map((property) => {
+					if (property.Rent === 200) {
+						return myNewProperties.push(property);
+					}
+					property.Rent = 200;
+					return myNewProperties.push(property);
+				});
+			} else {
+				myNewProperties.push(doIOwnAllColors[0]);
+			}
+		}
+		console.log(myNewProperties);
 	};
 
 	buyProperty = (value) => {

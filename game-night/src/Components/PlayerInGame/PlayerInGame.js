@@ -110,6 +110,7 @@ class PlayerInGame extends React.Component {
 		if (doIOwnAllColors[0].Color === '#88368D') {
 			if (doIOwnAllColors.length === 2) {
 				doIOwnAllColors.map((property) => {
+					property.CanBuyHouse = true;
 					property.OwnsAll = true;
 					return myNewProperties.push(property);
 				});
@@ -122,6 +123,7 @@ class PlayerInGame extends React.Component {
 		if (doIOwnAllColors[0].Color === '#0F76C0') {
 			if (doIOwnAllColors.length === 2) {
 				doIOwnAllColors.map((property) => {
+					property.canBuyHouse = true;
 					property.OwnsAll = true;
 					return myNewProperties.push(property);
 				});
@@ -174,6 +176,32 @@ class PlayerInGame extends React.Component {
 		}
 
 		// Checks basic properties
+		if (doIOwnAllColors.length === 3) {
+			doIOwnAllColors.map((property) => {
+				property.CanBuyHouse = true;
+				property.OwnsAll = true;
+				return myNewProperties.push(property);
+			});
+		} else {
+			doIOwnAllColors.map((property) => {
+				return myNewProperties.push(property);
+			});
+		}
+
+		if (doIOwnAllColors.length === 3) {
+			let ownAllPropertyColor = [];
+			this.state.playerProperty.filter(function (property) {
+				if (property.Color !== doIOwnAllColors[0].Color) {
+					return ownAllPropertyColor.push(property);
+				}
+				return ownAllPropertyColor;
+			});
+			doIOwnAllColors.map((property) => {
+				property.CanBuyHouse = true;
+				property.Rent = property.Rent * 2;
+				return ownAllPropertyColor.push(property);
+			});
+		}
 	};
 
 	buyProperty = (value) => {

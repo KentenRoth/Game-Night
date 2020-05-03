@@ -104,6 +104,24 @@ class PlayerInGame extends React.Component {
 				return myNewProperties.push(property);
 			}
 		});
+
+		// Checks Purple
+		if (doIOwnAllColors[0].Color === '#88368D') {
+			if (doIOwnAllColors.length === 2) {
+				doIOwnAllColors.map((property) => {
+					property.OwnsAll = true;
+					myNewProperties.push(property);
+				});
+			} else {
+				myNewProperties.push(doIOwnAllColors[0]);
+			}
+		}
+
+		// Checks Dark Blue
+
+		// Checks Utilities
+
+		// Checks Rail Roads
 		if (doIOwnAllColors[0].Color === '#999999') {
 			if (doIOwnAllColors.length === 2) {
 				doIOwnAllColors.map((property) => {
@@ -158,52 +176,6 @@ class PlayerInGame extends React.Component {
 		let doIOwnAllColors = myProperties.filter(function (property) {
 			return property.Color === propertyToBuy.Color;
 		});
-
-		// Checking if all RR are owned
-		if (doIOwnAllColors[0].Color === '#999999') {
-			let allProperties = [];
-			this.state.playerProperty.filter((property) => {
-				if (property.Color !== '#999999') {
-					return allProperties.push(property);
-				}
-				if (doIOwnAllColors.length === 2) {
-					doIOwnAllColors.map((property) => {
-						if (property.Rent === 50) {
-							return null;
-						}
-						property.Rent = 50;
-						return allProperties.push(property);
-					});
-				} else if (doIOwnAllColors.length === 3) {
-					doIOwnAllColors.map((property) => {
-						if (property.Rent === 100) {
-							return null;
-						}
-						property.Rent = 100;
-						return allProperties.push(property);
-					});
-				} else if (doIOwnAllColors.length === 4) {
-					doIOwnAllColors.map((property) => {
-						if (property.Rent === 200) {
-							return null;
-						}
-						property.Rent = 200;
-						return allProperties.push(property);
-					});
-				} else {
-					allProperties.push(doIOwnAllColors[0]);
-				}
-				return allProperties;
-			});
-			return axios
-				.patch(`/ingameuser/${id}`, {
-					money: playerFunds - propertyToBuy.Price,
-					property: myProperties,
-				})
-				.then((res) => {
-					console.log(res);
-				});
-		}
 
 		// Checking if all Utilties are owned
 		if (

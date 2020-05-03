@@ -402,7 +402,7 @@
 		"Price": 200,
 		"Rent": 25,
 		"Mortgage": 100,
-		"isMortgaged": false,
+		"IsMortgaged": false,
 		"OwnsAll": false
 	},
 	{
@@ -412,7 +412,7 @@
 		"Price": 200,
 		"Rent": 25,
 		"Mortgage": 100,
-		"isMortgaged": false,
+		"IsMortgaged": false,
 		"OwnsAll": false
 	},
 	{
@@ -422,7 +422,7 @@
 		"Price": 200,
 		"Rent": 25,
 		"Mortgage": 100,
-		"isMortgaged": false,
+		"IsMortgaged": false,
 		"OwnsAll": false
 	},
 	{
@@ -432,7 +432,7 @@
 		"Price": 200,
 		"Rent": 25,
 		"Mortgage": 100,
-		"isMortgaged": false,
+		"IsMortgaged": false,
 		"OwnsAll": false
 	},
 	{
@@ -442,7 +442,7 @@
 		"Price": 150,
 		"Rent": 4,
 		"Mortgage": 75,
-		"isMortgaged": false,
+		"IsMortgaged": false,
 		"OwnsAll": false
 	},
 	{
@@ -452,7 +452,7 @@
 		"Price": 150,
 		"Rent": 4,
 		"Mortgage": 75,
-		"isMortgaged": false,
+		"IsMortgaged": false,
 		"OwnsAll": false
 	}
 ]

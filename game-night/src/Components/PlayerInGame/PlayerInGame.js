@@ -103,6 +103,7 @@ class PlayerInGame extends React.Component {
 			if (property.Color !== value) {
 				return myNewProperties.push(property);
 			}
+			return null;
 		});
 
 		// Checks Purple
@@ -110,16 +111,36 @@ class PlayerInGame extends React.Component {
 			if (doIOwnAllColors.length === 2) {
 				doIOwnAllColors.map((property) => {
 					property.OwnsAll = true;
-					myNewProperties.push(property);
+					return myNewProperties.push(property);
 				});
 			} else {
-				myNewProperties.push(doIOwnAllColors[0]);
+				return myNewProperties.push(doIOwnAllColors[0]);
 			}
 		}
 
 		// Checks Dark Blue
+		if (doIOwnAllColors[0].Color === '#0F76C0') {
+			if (doIOwnAllColors.length === 2) {
+				doIOwnAllColors.map((property) => {
+					property.OwnsAll = true;
+					return myNewProperties.push(property);
+				});
+			} else {
+				return myNewProperties.push(doIOwnAllColors[0]);
+			}
+		}
 
 		// Checks Utilities
+		if (doIOwnAllColors[0].Color === '#ffffff') {
+			if (doIOwnAllColors.length === 2) {
+				doIOwnAllColors.map((property) => {
+					property.Rent = 10;
+					return myNewProperties.push(property);
+				});
+			} else {
+				return myNewProperties.push(doIOwnAllColors[0]);
+			}
+		}
 
 		// Checks Rail Roads
 		if (doIOwnAllColors[0].Color === '#999999') {
@@ -151,7 +172,8 @@ class PlayerInGame extends React.Component {
 				myNewProperties.push(doIOwnAllColors[0]);
 			}
 		}
-		console.log(myNewProperties);
+
+		// Checks basic properties
 	};
 
 	buyProperty = (value) => {

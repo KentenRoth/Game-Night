@@ -9,7 +9,7 @@ class UtilsPropertyCard extends React.Component {
 		border: '1px solid black',
 		padding: '10px',
 		margin: '10px',
-		width: '170px'
+		width: '170px',
 	};
 
 	colorBox = {
@@ -17,7 +17,14 @@ class UtilsPropertyCard extends React.Component {
 		border: '1px solid black',
 		height: '50px',
 		margin: 'auto',
-		width: '150px'
+		width: '150px',
+	};
+
+	mortgageText = () => {
+		if (this.props.property.IsMortgaged === false) {
+			return 'Mortgage';
+		}
+		return 'Un-Mortgage';
 	};
 
 	render() {
@@ -36,7 +43,10 @@ class UtilsPropertyCard extends React.Component {
 						<input type="number" placeholder="Dice Amount" />
 					</form>
 					<hr />
-					<MortgageButton text={'Mortgage'} color={'#E73B27'} />
+					<MortgageButton
+						text={this.mortgageText()}
+						color={'#E73B27'}
+					/>
 				</div>
 			</div>
 		);

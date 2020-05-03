@@ -20,6 +20,14 @@ class PropertyCard extends React.Component {
 		width: '150px',
 	};
 
+	mortgageText = () => {
+		if (this.props.property.IsMortgaged === false) {
+			return 'Mortgage';
+		}
+
+		return 'Un-Mortgage';
+	};
+
 	render() {
 		return (
 			<div className="box">
@@ -49,7 +57,11 @@ class PropertyCard extends React.Component {
 						color={'#18AC4C'}
 						CanBuyHouse={this.props.property.CanBuyHouse}
 					/>
-					<MortgageButton text={'Mortgage'} color={'#E73B27'} />
+					<MortgageButton
+						text={this.mortgageText()}
+						color={'#E73B27'}
+						property={this.props.property}
+					/>
 				</div>
 			</div>
 		);

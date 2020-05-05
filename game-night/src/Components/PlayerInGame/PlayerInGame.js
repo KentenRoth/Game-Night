@@ -179,10 +179,7 @@ class PlayerInGame extends React.Component {
 			}
 		}
 
-		console.log();
-
 		// Checks basic properties
-
 		if (
 			doIOwnAllColors[0].Color !== '#88368D' &&
 			doIOwnAllColors[0].Color !== '#0F76C0' &&
@@ -216,8 +213,6 @@ class PlayerInGame extends React.Component {
 				});
 			}
 		}
-
-		console.log(myNewProperties);
 
 		axios.patch(`/ingameuser/${myID}`, {
 			property: myNewProperties,
@@ -427,6 +422,11 @@ class PlayerInGame extends React.Component {
 					property: buyerNewPropertyList,
 				})
 			);
+	};
+
+	// OOPPSS I forgot you get money from chance/CC  Yikes.. Do I even play Monopoly?!?
+	collectFromBank = () => {
+		console.log('collect from bank');
 	};
 
 	render() {

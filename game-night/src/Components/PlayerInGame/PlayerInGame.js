@@ -114,6 +114,7 @@ class PlayerInGame extends React.Component {
 					if (property.OwnsAll === true) {
 						return null;
 					}
+					property.Rent = property.Rent * 2;
 					property.CanBuyHouse = true;
 					property.OwnsAll = true;
 					return myNewProperties.push(property);
@@ -188,6 +189,7 @@ class PlayerInGame extends React.Component {
 		) {
 			if (doIOwnAllColors.length === 3) {
 				doIOwnAllColors.map((property) => {
+					property.Rent = property.Rent * 2;
 					property.CanBuyHouse = true;
 					property.OwnsAll = true;
 					return myNewProperties.push(property);

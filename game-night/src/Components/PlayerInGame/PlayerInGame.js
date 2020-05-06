@@ -128,6 +128,7 @@ class PlayerInGame extends React.Component {
 		if (doIOwnAllColors[0].Color === '#0F76C0') {
 			if (doIOwnAllColors.length === 2) {
 				doIOwnAllColors.map((property) => {
+					property.Rent = property.Rent * 2;
 					property.CanBuyHouse = true;
 					property.OwnsAll = true;
 					return myNewProperties.push(property);
@@ -219,6 +220,10 @@ class PlayerInGame extends React.Component {
 		axios.patch(`/ingameuser/${myID}`, {
 			property: myNewProperties,
 		});
+	};
+
+	noLongerDoubleRent = () => {
+		console.log('props');
 	};
 
 	buyProperty = (value) => {

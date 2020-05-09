@@ -425,8 +425,6 @@ class PlayerInGame extends React.Component {
 			amountPaying = 0;
 		}
 
-		console.log(myNewPropertyList);
-
 		axios
 			.patch(`/ingameuser/${myID}`, {
 				money: myCash + amountPaying,
@@ -456,6 +454,7 @@ class PlayerInGame extends React.Component {
 			if (property.Color === value.Color) {
 				property.Rent = property.Rent / 2;
 				property.OwnsAll = false;
+				property.CanBuyHouse = false;
 				propertyList.push(property);
 			}
 			return null;
@@ -472,6 +471,10 @@ class PlayerInGame extends React.Component {
 		if (value.task === 'Buy House') {
 			return this.buyingHouseForProperty(value.property);
 		}
+
+		if (value.task === 'Un-Mortgage') {
+			return console.log('Need this function yet');
+		}
 		this.mortgageProperty(value.property);
 	};
 
@@ -479,8 +482,28 @@ class PlayerInGame extends React.Component {
 		console.log('Buy House', property);
 	};
 
-	mortgageProperty = (property) => {
-		console.log('Mortgage', property);
+	mortgageProperty = (mortgageProperty) => {
+		const myID = this.state.player._id;
+		const myCurrentCash = this.state.player.money;
+		let myNewPropertyList = [];
+		let mortgageAmount;
+		if (mortgageProperty.OwnsAll === true) {
+			myNewPropertyList = this.noLongerDoubleRent(mortgageProperty);
+		}
+
+		myNewPropertyList.find((property) => {
+			if (property.Deed === mortgageProperty.Deed) {
+				property.IsMortgaged = true;
+				mortgageAmount = property.Mortgage;
+			}
+		});
+
+		console.log(myCurrentCash + mortgageAmount);
+
+		axios.patch(`/ingameuser/${myID}`, {
+			property: myNewPropertyList,
+			money: myCurrentCash + mortgageAmount,
+		});
 	};
 
 	render() {

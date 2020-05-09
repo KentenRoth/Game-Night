@@ -374,6 +374,7 @@ class PlayerInGame extends React.Component {
 	sellProperty = (value) => {
 		const myID = this.state.player._id;
 		const myCash = this.state.player.money;
+		let propertyList = [];
 		let myNewPropertyList = [];
 		let soldProperty;
 
@@ -397,6 +398,18 @@ class PlayerInGame extends React.Component {
 			return null;
 		});
 
+		if (soldProperty.OwnsAll === true) {
+			myNewPropertyList = [];
+			propertyList = this.noLongerDoubleRent(soldProperty);
+
+			propertyList.map((property) => {
+				if (property.Deed !== soldProperty.Deed) {
+					myNewPropertyList.push(property);
+				}
+				return null;
+			});
+		}
+
 		this.state.playerProperty.filter((property) => {
 			if (property.Deed !== propertySold) {
 				return sellerNewPropertyList.push(property);
@@ -412,9 +425,7 @@ class PlayerInGame extends React.Component {
 			amountPaying = 0;
 		}
 
-		if (soldProperty.OwnsAll === true) {
-			myNewPropertyList = this.noLongerDoubleRent(soldProperty);
-		}
+		console.log(myNewPropertyList);
 
 		axios
 			.patch(`/ingameuser/${myID}`, {
@@ -432,7 +443,6 @@ class PlayerInGame extends React.Component {
 	// Can be used for mortgaging property
 	noLongerDoubleRent = (value) => {
 		let propertyList = [];
-		let myNewPropertyList = [];
 		let currentProperties = this.state.playerProperty;
 
 		currentProperties.map((property) => {
@@ -450,19 +460,27 @@ class PlayerInGame extends React.Component {
 			}
 			return null;
 		});
-
-		propertyList.map((property) => {
-			if (property.Deed !== value.Deed) {
-				myNewPropertyList.push(property);
-			}
-			return null;
-		});
-		return myNewPropertyList;
+		return propertyList;
 	};
 
 	// OOPPSS I forgot you get money from chance/CC  Yikes.. Do I even play Monopoly?!?
 	collectFromBank = () => {
 		console.log('collect from bank');
+	};
+
+	mortgageOrBuyHouse = (value) => {
+		if (value.task === 'Buy House') {
+			return this.buyingHouseForProperty(value.property);
+		}
+		this.mortgageProperty(value.property);
+	};
+
+	buyingHouseForProperty = (property) => {
+		console.log('Buy House', property);
+	};
+
+	mortgageProperty = (property) => {
+		console.log('Mortgage', property);
 	};
 
 	render() {
@@ -595,6 +613,7 @@ class PlayerInGame extends React.Component {
 								<PropertyCard
 									key={property.Deed}
 									property={property}
+									mortgageOrBuy={this.mortgageOrBuyHouse}
 								/>
 							);
 						})}

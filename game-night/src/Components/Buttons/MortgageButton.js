@@ -40,7 +40,7 @@ const MortgageButton = (props) => {
 	};
 
 	const letsGetMoreMoney = (e) => {
-		console.log(props.property);
+		return props.whatToDo({ property: props.property, task: props.text });
 	};
 
 	return (

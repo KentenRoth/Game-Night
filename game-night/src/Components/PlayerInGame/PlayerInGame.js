@@ -222,10 +222,6 @@ class PlayerInGame extends React.Component {
 		});
 	};
 
-	noLongerDoubleRent = () => {
-		console.log('props');
-	};
-
 	buyProperty = (value) => {
 		let allProperties = data;
 		let propertyToBuy;
@@ -380,7 +376,7 @@ class PlayerInGame extends React.Component {
 	sellProperty = (value) => {
 		const myID = this.state.player._id;
 		const myCash = this.state.player.money;
-		const myNewPropertyList = [];
+		let myNewPropertyList = [];
 		let soldProperty;
 
 		const playerGettingProperty = this.state.allPlayers.find((player) => {
@@ -418,6 +414,10 @@ class PlayerInGame extends React.Component {
 			amountPaying = 0;
 		}
 
+		if (soldProperty.OwnsAll === true) {
+			myNewPropertyList = this.noLongerDoubleRent(soldProperty);
+		}
+
 		axios
 			.patch(`/ingameuser/${myID}`, {
 				money: myCash + amountPaying,
@@ -429,6 +429,33 @@ class PlayerInGame extends React.Component {
 					property: buyerNewPropertyList,
 				})
 			);
+	};
+
+	noLongerDoubleRent = (value) => {
+		let propertyList = [];
+		let myNewPropertyList = [];
+		let currentProperties = this.state.playerProperty;
+
+		currentProperties.map((property) => {
+			if (property.Color !== value.Color) {
+				propertyList.push(property);
+			}
+		});
+
+		currentProperties.filter((property) => {
+			if (property.Color === value.Color) {
+				property.Rent = property.Rent / 2;
+				property.OwnsAll = false;
+				propertyList.push(property);
+			}
+		});
+
+		propertyList.map((property) => {
+			if (property.Deed !== value.Deed) {
+				myNewPropertyList.push(property);
+			}
+		});
+		return myNewPropertyList;
 	};
 
 	// OOPPSS I forgot you get money from chance/CC  Yikes.. Do I even play Monopoly?!?

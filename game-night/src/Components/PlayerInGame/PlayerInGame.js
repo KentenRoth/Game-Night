@@ -478,8 +478,46 @@ class PlayerInGame extends React.Component {
 		this.mortgageProperty(value.property);
 	};
 
-	buyingHouseForProperty = (property) => {
-		console.log('Buy House', property);
+	buyingHouseForProperty = (propertyUpgrade) => {
+		const myID = this.state.player._id;
+		const myCurrentCash = this.state.player.money;
+		const myCurrentProperties = this.state.playerProperty;
+		let myNewPropertyList = [];
+		let houseCost = propertyUpgrade.HouseCost;
+
+		if (myCurrentCash - houseCost < 0) {
+			return console.log('no');
+		}
+
+		myCurrentProperties.map((property) => {
+			if (propertyUpgrade.Deed !== property.Deed) {
+				myNewPropertyList.push(property);
+			}
+			return null;
+		});
+
+		if (propertyUpgrade.Rent === propertyUpgrade.House4) {
+			propertyUpgrade.Rent = propertyUpgrade.Hotel;
+			propertyUpgrade.CanBuyHouse = false;
+		}
+		if (propertyUpgrade.Rent === propertyUpgrade.House3) {
+			propertyUpgrade.Rent = propertyUpgrade.House4;
+		}
+		if (propertyUpgrade.Rent === propertyUpgrade.House2) {
+			propertyUpgrade.Rent = propertyUpgrade.House3;
+		}
+		if (propertyUpgrade.Rent === propertyUpgrade.House1) {
+			propertyUpgrade.Rent = propertyUpgrade.House2;
+		}
+		if (propertyUpgrade.Rent < propertyUpgrade.House1) {
+			propertyUpgrade.Rent = propertyUpgrade.House1;
+		}
+
+		myNewPropertyList.push(propertyUpgrade);
+		axios.patch(`/ingameuser/${myID}`, {
+			property: myNewPropertyList,
+			money: myCurrentCash - houseCost,
+		});
 	};
 
 	mortgageProperty = (mortgageProperty) => {

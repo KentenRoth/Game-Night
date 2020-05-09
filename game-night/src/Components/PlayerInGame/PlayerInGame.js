@@ -84,8 +84,6 @@ class PlayerInGame extends React.Component {
 			});
 	};
 
-	// Owning all properties needs moved from buyProperty
-	// If property is sold and all owned needs to check
 	// If property bought from another player.  This needs check to see if collection is completed
 	ownAllProperties = (value) => {
 		let myProperties = this.state.playerProperty;
@@ -431,6 +429,7 @@ class PlayerInGame extends React.Component {
 			);
 	};
 
+	// Can be used for mortgaging property
 	noLongerDoubleRent = (value) => {
 		let propertyList = [];
 		let myNewPropertyList = [];

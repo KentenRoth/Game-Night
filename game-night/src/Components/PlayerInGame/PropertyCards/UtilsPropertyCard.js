@@ -46,6 +46,7 @@ class UtilsPropertyCard extends React.Component {
 					<MortgageButton
 						text={this.mortgageText()}
 						color={'#E73B27'}
+						property={this.props.property}
 					/>
 				</div>
 			</div>

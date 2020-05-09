@@ -440,6 +440,7 @@ class PlayerInGame extends React.Component {
 			if (property.Color !== value.Color) {
 				propertyList.push(property);
 			}
+			return null;
 		});
 
 		currentProperties.filter((property) => {
@@ -448,12 +449,14 @@ class PlayerInGame extends React.Component {
 				property.OwnsAll = false;
 				propertyList.push(property);
 			}
+			return null;
 		});
 
 		propertyList.map((property) => {
 			if (property.Deed !== value.Deed) {
 				myNewPropertyList.push(property);
 			}
+			return null;
 		});
 		return myNewPropertyList;
 	};

@@ -28,6 +28,30 @@ class PropertyCard extends React.Component {
 		return 'Un-Mortgage';
 	};
 
+	howManyHouses = () => {
+		let property = this.props.property;
+		if (property.Rent === property.House1) {
+			return 1;
+		}
+		if (property.Rent === property.House2) {
+			return 2;
+		}
+		if (property.Rent === property.House3) {
+			return 3;
+		}
+		if (property.Rent === property.House4) {
+			return 4;
+		}
+		return 0;
+	};
+
+	doesHaveHotel = () => {
+		if (this.props.property.Rent === this.props.property.Hotel) {
+			return 'Yes';
+		}
+		return 'No';
+	};
+
 	letsGetMoreMoney = (value) => {
 		this.props.mortgageOrBuy(value);
 	};
@@ -49,11 +73,11 @@ class PropertyCard extends React.Component {
 					</div>
 					<div>
 						{/* This will need function */}
-						<p># of Houses: 0</p>
+						<p># of Houses: {this.howManyHouses()}</p>
 					</div>
 					<div>
 						{/* This will need function to figure out */}
-						<p>Hotel: No</p>
+						<p>Hotel: {this.doesHaveHotel()}</p>
 					</div>
 					<hr />
 					<MortgageButton

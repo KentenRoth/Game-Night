@@ -473,7 +473,7 @@ class PlayerInGame extends React.Component {
 		}
 
 		if (value.task === 'Un-Mortgage') {
-			return console.log('Need this function yet');
+			return this.unMortgageProperty(value.property);
 		}
 		this.mortgageProperty(value.property);
 	};
@@ -529,6 +529,7 @@ class PlayerInGame extends React.Component {
 
 		myCurrentProperties.map((property) => {
 			myNewPropertyList.push(property);
+			return null;
 		});
 
 		if (mortgageProperty.OwnsAll === true) {
@@ -540,11 +541,33 @@ class PlayerInGame extends React.Component {
 				property.IsMortgaged = true;
 				mortgageAmount = property.Mortgage;
 			}
+			return null;
 		});
 
 		axios.patch(`/ingameuser/${myID}`, {
 			property: myNewPropertyList,
 			money: myCurrentCash + mortgageAmount,
+		});
+	};
+
+	unMortgageProperty = (mortgagedProperty) => {
+		const myID = this.state.player._id;
+		const myCurrentCash = this.state.player.money;
+
+		let mortgageAmount = mortgagedProperty.Mortgage * 1.1;
+
+		console.log(myCurrentCash - mortgageAmount);
+
+		if (myCurrentCash - mortgageAmount < 0) {
+			return console.log('Nope');
+		}
+
+		mortgagedProperty.IsMortgaged = false;
+
+		this.ownAllProperties(mortgagedProperty.Color);
+
+		axios.patch(`/ingameuser/${myID}`, {
+			money: myCurrentCash - mortgageAmount,
 		});
 	};
 

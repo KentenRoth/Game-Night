@@ -523,8 +523,14 @@ class PlayerInGame extends React.Component {
 	mortgageProperty = (mortgageProperty) => {
 		const myID = this.state.player._id;
 		const myCurrentCash = this.state.player.money;
+		const myCurrentProperties = this.state.playerProperty;
 		let myNewPropertyList = [];
 		let mortgageAmount;
+
+		myCurrentProperties.map((property) => {
+			myNewPropertyList.push(property);
+		});
+
 		if (mortgageProperty.OwnsAll === true) {
 			myNewPropertyList = this.noLongerDoubleRent(mortgageProperty);
 		}
@@ -535,8 +541,6 @@ class PlayerInGame extends React.Component {
 				mortgageAmount = property.Mortgage;
 			}
 		});
-
-		console.log(myCurrentCash + mortgageAmount);
 
 		axios.patch(`/ingameuser/${myID}`, {
 			property: myNewPropertyList,

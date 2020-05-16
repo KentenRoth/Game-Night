@@ -475,6 +475,10 @@ class PlayerInGame extends React.Component {
 		if (value.task === 'Un-Mortgage') {
 			return this.unMortgageProperty(value.property);
 		}
+
+		if (value.task === 'Sell House') {
+			return this.sellHouseForProperty(value.property);
+		}
 		this.mortgageProperty(value.property);
 	};
 
@@ -514,9 +518,61 @@ class PlayerInGame extends React.Component {
 		}
 
 		myNewPropertyList.push(propertyUpgrade);
+
 		axios.patch(`/ingameuser/${myID}`, {
 			property: myNewPropertyList,
 			money: myCurrentCash - houseCost,
+		});
+	};
+
+	sellHouseForProperty = (propertyDowngrade) => {
+		const myID = this.state.player._id;
+		const myCurrentCash = this.state.player.money;
+		const myCurrentProperties = this.state.playerProperty;
+		let myNewPropertyList = [];
+		let houseCost = propertyDowngrade.HouseCost;
+		let baseProperty = data.find((property) => {
+			if (property.Deed === propertyDowngrade.Deed) {
+				return property;
+			}
+			return null;
+		});
+
+		myCurrentProperties.map((property) => {
+			if (propertyDowngrade.Deed !== property.Deed) {
+				myNewPropertyList.push(property);
+			}
+			return null;
+		});
+
+		if (propertyDowngrade.Rent === propertyDowngrade.House1) {
+			if (propertyDowngrade.OwnsAll === false) {
+				return (propertyDowngrade.Rent = baseProperty.Rent);
+			}
+			propertyDowngrade.Rent = baseProperty.Rent * 2;
+		}
+
+		if (propertyDowngrade.Rent === propertyDowngrade.House2) {
+			propertyDowngrade.Rent = propertyDowngrade.House1;
+		}
+
+		if (propertyDowngrade.Rent === propertyDowngrade.House3) {
+			propertyDowngrade.Rent = propertyDowngrade.House2;
+		}
+
+		if (propertyDowngrade.Rent === propertyDowngrade.House4) {
+			propertyDowngrade.Rent = propertyDowngrade.House3;
+		}
+
+		if (propertyDowngrade.Rent === propertyDowngrade.Hotel) {
+			propertyDowngrade.Rent = propertyDowngrade.House4;
+			propertyDowngrade.CanBuyHouse = true;
+		}
+		myNewPropertyList.push(propertyDowngrade);
+
+		axios.patch(`/ingameuser/${myID}`, {
+			property: myNewPropertyList,
+			money: myCurrentCash + houseCost,
 		});
 	};
 

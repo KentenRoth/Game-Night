@@ -91,6 +91,7 @@ class PropertyCard extends React.Component {
 						text={'Sell House'}
 						color={'#E73B27'}
 						property={this.props.property}
+						whatToDo={this.letsGetMoreMoney}
 					/>
 					<MortgageButton
 						text={this.mortgageText()}

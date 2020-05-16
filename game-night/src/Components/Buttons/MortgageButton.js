@@ -43,6 +43,13 @@ const MortgageButton = (props) => {
 		) {
 			return 'disabled';
 		}
+
+		if (
+			props.text === 'Mortgage' &&
+			props.property.Rent >= props.property.House1
+		) {
+			return 'disabled';
+		}
 		return;
 	};
 

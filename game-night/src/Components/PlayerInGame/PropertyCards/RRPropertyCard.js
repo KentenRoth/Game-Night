@@ -27,6 +27,10 @@ class RRPropertyCard extends React.Component {
 		return 'Un-Mortgage';
 	};
 
+	letsGetMoreMoney = (value) => {
+		this.props.mortgageOrBuy(value);
+	};
+
 	render() {
 		return (
 			<div className="box">
@@ -44,6 +48,7 @@ class RRPropertyCard extends React.Component {
 						text={this.mortgageText()}
 						color={'#E73B27'}
 						property={this.props.property}
+						whatToDo={this.letsGetMoreMoney}
 					/>
 				</div>
 			</div>

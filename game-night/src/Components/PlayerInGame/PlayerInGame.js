@@ -612,8 +612,6 @@ class PlayerInGame extends React.Component {
 
 		let mortgageAmount = mortgagedProperty.Mortgage * 1.1;
 
-		console.log(myCurrentCash - mortgageAmount);
-
 		if (myCurrentCash - mortgageAmount < 0) {
 			return console.log('Nope');
 		}
@@ -742,6 +740,7 @@ class PlayerInGame extends React.Component {
 									<UtilsPropertyCard
 										key={property.Deed}
 										property={property}
+										mortgageOrBuy={this.mortgageOrBuyHouse}
 									/>
 								);
 							}
@@ -750,6 +749,7 @@ class PlayerInGame extends React.Component {
 									<RRPropertyCard
 										key={property.Deed}
 										property={property}
+										mortgageOrBuy={this.mortgageOrBuyHouse}
 									/>
 								);
 							}

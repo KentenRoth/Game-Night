@@ -33,6 +33,9 @@ class PayUtilities extends React.Component {
 	};
 
 	payUtilityBill = (e) => {
+		if (this.refs.utility.value.length === 0) {
+			return e.preventDefault();
+		}
 		let pay = {
 			userID: this.refs.utility.value,
 			diceAmount: e.target.amount.value,

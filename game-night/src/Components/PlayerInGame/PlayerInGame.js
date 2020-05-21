@@ -198,21 +198,6 @@ class PlayerInGame extends React.Component {
 					return myNewProperties.push(property);
 				});
 			}
-
-			if (doIOwnAllColors.length === 3) {
-				let ownAllPropertyColor = [];
-				this.state.playerProperty.filter(function (property) {
-					if (property.Color !== doIOwnAllColors[0].Color) {
-						return ownAllPropertyColor.push(property);
-					}
-					return ownAllPropertyColor;
-				});
-				doIOwnAllColors.map((property) => {
-					property.CanBuyHouse = true;
-					property.Rent = property.Rent * 2;
-					return ownAllPropertyColor.push(property);
-				});
-			}
 		}
 
 		axios.patch(`/ingameuser/${myID}`, {
@@ -425,6 +410,12 @@ class PlayerInGame extends React.Component {
 			amountPaying = 0;
 		}
 
+		this.theyOwnAllProperties(
+			soldProperty.Color,
+			buyerID,
+			buyerNewPropertyList
+		);
+
 		axios
 			.patch(`/ingameuser/${myID}`, {
 				money: myCash + amountPaying,
@@ -433,9 +424,129 @@ class PlayerInGame extends React.Component {
 			.then(
 				axios.patch(`/ingameuser/${buyerID}`, {
 					money: buyingPayerCurrentCash - amountPaying,
-					property: buyerNewPropertyList,
 				})
 			);
+	};
+
+	theyOwnAllProperties = (propertyColor, user, propertyList) => {
+		let playerPropertyList = propertyList;
+		let playerID = user;
+		let value = propertyColor;
+		let myNewProperties = [];
+
+		if (playerPropertyList.length === 0) {
+			return null;
+		}
+
+		let doIOwnAllColors = playerPropertyList.filter((property) => {
+			return value === property.Color;
+		});
+
+		playerPropertyList.filter((property) => {
+			if (property.Color !== value) {
+				return myNewProperties.push(property);
+			}
+			return null;
+		});
+
+		// Checks Purple
+		if (doIOwnAllColors[0].Color === '#88368D') {
+			if (doIOwnAllColors.length === 2) {
+				doIOwnAllColors.map((property) => {
+					if (property.OwnsAll === true) {
+						return null;
+					}
+					property.Rent = property.Rent * 2;
+					property.CanBuyHouse = true;
+					property.OwnsAll = true;
+					return myNewProperties.push(property);
+				});
+			} else {
+				myNewProperties.push(doIOwnAllColors[0]);
+			}
+		}
+
+		// Checks Dark Blue
+		if (doIOwnAllColors[0].Color === '#0F76C0') {
+			if (doIOwnAllColors.length === 2) {
+				doIOwnAllColors.map((property) => {
+					property.Rent = property.Rent * 2;
+					property.CanBuyHouse = true;
+					property.OwnsAll = true;
+					return myNewProperties.push(property);
+				});
+			} else {
+				myNewProperties.push(doIOwnAllColors[0]);
+			}
+		}
+
+		// Checks Utilities
+		if (doIOwnAllColors[0].Color === '#ffffff') {
+			if (doIOwnAllColors.length === 2) {
+				doIOwnAllColors.map((property) => {
+					property.Rent = 10;
+					return myNewProperties.push(property);
+				});
+			} else {
+				myNewProperties.push(doIOwnAllColors[0]);
+			}
+		}
+
+		// Checks Rail Roads
+		if (doIOwnAllColors[0].Color === '#999999') {
+			if (doIOwnAllColors.length === 2) {
+				doIOwnAllColors.map((property) => {
+					if (property.Rent === 50) {
+						return myNewProperties.push(property);
+					}
+					property.Rent = 50;
+					return myNewProperties.push(property);
+				});
+			} else if (doIOwnAllColors.length === 3) {
+				doIOwnAllColors.map((property) => {
+					if (property.Rent === 100) {
+						return myNewProperties.push(property);
+					}
+					property.Rent = 100;
+					return myNewProperties.push(property);
+				});
+			} else if (doIOwnAllColors.length === 4) {
+				doIOwnAllColors.map((property) => {
+					if (property.Rent === 200) {
+						return myNewProperties.push(property);
+					}
+					property.Rent = 200;
+					return myNewProperties.push(property);
+				});
+			} else {
+				myNewProperties.push(doIOwnAllColors[0]);
+			}
+		}
+
+		// Checks basic properties
+		if (
+			doIOwnAllColors[0].Color !== '#88368D' &&
+			doIOwnAllColors[0].Color !== '#0F76C0' &&
+			doIOwnAllColors[0].Color !== '#ffffff' &&
+			doIOwnAllColors[0].Color !== '#999999'
+		) {
+			if (doIOwnAllColors.length === 3) {
+				doIOwnAllColors.map((property) => {
+					property.Rent = property.Rent * 2;
+					property.CanBuyHouse = true;
+					property.OwnsAll = true;
+					return myNewProperties.push(property);
+				});
+			} else {
+				doIOwnAllColors.map((property) => {
+					return myNewProperties.push(property);
+				});
+			}
+		}
+
+		axios.patch(`/ingameuser/${playerID}`, {
+			property: myNewProperties,
+		});
 	};
 
 	// Can be used for mortgaging property

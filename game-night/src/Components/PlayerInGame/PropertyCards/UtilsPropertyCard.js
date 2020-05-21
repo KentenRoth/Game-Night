@@ -41,11 +41,9 @@ class UtilsPropertyCard extends React.Component {
 					</div>
 					<hr />
 					<div>
-						<p>Rent: ${this.props.property.Rent}</p>
+						<p>Dice X {this.props.property.Rent}</p>
 					</div>
-					<form>
-						<input type="number" placeholder="Dice Amount" />
-					</form>
+
 					<hr />
 					<MortgageButton
 						text={this.mortgageText()}

@@ -144,6 +144,10 @@ class PlayerInGame extends React.Component {
 					return myNewProperties.push(property);
 				});
 			} else {
+				doIOwnAllColors.map((property) => {
+					property.Rent = 4;
+					return myNewProperties.push(property);
+				});
 				return myNewProperties.push(doIOwnAllColors[0]);
 			}
 		}
@@ -155,6 +159,7 @@ class PlayerInGame extends React.Component {
 					if (property.Rent === 50) {
 						return myNewProperties.push(property);
 					}
+					property.OwnsAll = true;
 					property.Rent = 50;
 					return myNewProperties.push(property);
 				});
@@ -163,6 +168,7 @@ class PlayerInGame extends React.Component {
 					if (property.Rent === 100) {
 						return myNewProperties.push(property);
 					}
+					property.OwnsAll = true;
 					property.Rent = 100;
 					return myNewProperties.push(property);
 				});
@@ -171,6 +177,7 @@ class PlayerInGame extends React.Component {
 					if (property.Rent === 200) {
 						return myNewProperties.push(property);
 					}
+					property.OwnsAll = true;
 					property.Rent = 200;
 					return myNewProperties.push(property);
 				});
@@ -485,6 +492,7 @@ class PlayerInGame extends React.Component {
 			if (doIOwnAllColors.length === 2) {
 				doIOwnAllColors.map((property) => {
 					property.Rent = 10;
+					property.OwnsAll = true;
 					return myNewProperties.push(property);
 				});
 			} else {
@@ -499,6 +507,7 @@ class PlayerInGame extends React.Component {
 					if (property.Rent === 50) {
 						return myNewProperties.push(property);
 					}
+					property.OwnsAll = true;
 					property.Rent = 50;
 					return myNewProperties.push(property);
 				});
@@ -507,6 +516,7 @@ class PlayerInGame extends React.Component {
 					if (property.Rent === 100) {
 						return myNewProperties.push(property);
 					}
+					property.OwnsAll = true;
 					property.Rent = 100;
 					return myNewProperties.push(property);
 				});
@@ -515,6 +525,7 @@ class PlayerInGame extends React.Component {
 					if (property.Rent === 200) {
 						return myNewProperties.push(property);
 					}
+					property.OwnsAll = true;
 					property.Rent = 200;
 					return myNewProperties.push(property);
 				});
@@ -563,6 +574,23 @@ class PlayerInGame extends React.Component {
 
 		currentProperties.filter((property) => {
 			if (property.Color === value.Color) {
+				if (property.Color === '#999999') {
+					if (property.Rent === 200) {
+						property.Rent = 100;
+						return propertyList.push(property);
+					}
+					if (property.Rent === 100) {
+						property.Rent = 50;
+						return propertyList.push(property);
+					}
+					if (property.Rent === 50) {
+						property.Rent = 25;
+						return propertyList.push(property);
+					}
+					if (property.Rent === 25) {
+						return propertyList.push(property);
+					}
+				}
 				property.Rent = property.Rent / 2;
 				property.OwnsAll = false;
 				property.CanBuyHouse = false;

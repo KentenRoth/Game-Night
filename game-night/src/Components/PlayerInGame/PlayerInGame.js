@@ -647,6 +647,7 @@ class PlayerInGame extends React.Component {
 		this.mortgageProperty(value.property);
 	};
 
+	// Checks Funds before transaction still needs error message
 	buyingHouseForProperty = (propertyUpgrade) => {
 		const myID = this.state.player._id;
 		const myCurrentCash = this.state.player.money;
@@ -771,6 +772,7 @@ class PlayerInGame extends React.Component {
 		});
 	};
 
+	// Checks Funds before transaction still needs error message
 	unMortgageProperty = (mortgagedProperty) => {
 		const myID = this.state.player._id;
 		const myCurrentCash = this.state.player.money;

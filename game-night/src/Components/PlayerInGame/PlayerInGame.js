@@ -227,6 +227,7 @@ class PlayerInGame extends React.Component {
 		});
 	};
 
+	// Checks Funds before transaction still needs error message
 	buyProperty = (value) => {
 		let allProperties = data;
 		let propertyToBuy;
@@ -256,6 +257,7 @@ class PlayerInGame extends React.Component {
 			});
 	};
 
+	// Checks Funds before transaction still needs error message
 	payRent = (value) => {
 		const myID = this.state.player._id;
 		const playerFunds = this.state.player.money;
@@ -298,6 +300,7 @@ class PlayerInGame extends React.Component {
 	};
 
 	// Paying Bank a set amount.
+	// Checks Funds before transaction still needs error message
 	payBank = (value) => {
 		const playerFunds = this.state.player.money;
 		const playerID = this.state.player._id;
@@ -321,6 +324,7 @@ class PlayerInGame extends React.Component {
 			});
 	};
 
+	// Checks Funds before transaction still needs error message
 	payPlayer = (value) => {
 		const playerFunds = this.state.player.money;
 		const myID = this.state.player._id;
@@ -338,6 +342,10 @@ class PlayerInGame extends React.Component {
 			return;
 		}
 
+		if (playerFunds < paidAmount) {
+			console.log('Nope');
+		}
+
 		axios
 			.patch(`/ingameuser/${myID}`, {
 				money: playerFunds - value.amount,
@@ -349,7 +357,7 @@ class PlayerInGame extends React.Component {
 			});
 	};
 
-	// Needs to pay person that owns property correct amount
+	// Checks Funds before transaction still needs error message
 	payUtilities = (value) => {
 		const myID = this.state.player._id;
 		const playerFunds = this.state.player.money;
@@ -365,6 +373,10 @@ class PlayerInGame extends React.Component {
 			}
 			return playerGettingPaid;
 		});
+
+		if (playerFunds < playerGettingPaid) {
+			return console.log('Nope');
+		}
 
 		axios
 			.patch(`/ingameuser/${myID}`, {

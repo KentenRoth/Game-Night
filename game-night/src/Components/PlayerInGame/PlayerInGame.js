@@ -4,6 +4,7 @@ import data from '../../Data/property.json';
 
 // Action Section
 import PassedGo from './ActionSection/PassedGo';
+import CollectFromBank from './ActionSection/CollectFromBank';
 import BuyProperty from './ActionSection/BuyProperty';
 import PlayerInGameCard from './PlayerInGameCard';
 import PayRent from './ActionSection/PayRent';
@@ -167,6 +168,7 @@ class PlayerInGame extends React.Component {
 			isMortgaged.map((property) => {
 				return myNewProperties.push(property);
 			});
+
 			if (isNotMortgaged.length === 2) {
 				isNotMortgaged.map((property) => {
 					if (property.Rent === 50) {
@@ -605,9 +607,17 @@ class PlayerInGame extends React.Component {
 		return propertyList;
 	};
 
-	// OOPPSS I forgot you get money from chance/CC  Yikes.. Do I even play Monopoly?!?
-	collectFromBank = () => {
-		console.log('collect from bank');
+	collectFromBank = (value) => {
+		const myID = this.state.player._id;
+		let currentCash = this.state.player.money;
+		let amount = parseInt(value);
+		if (amount > 200) {
+			return console.log('nope');
+		}
+
+		axios.patch(`/ingameuser/${myID}`, {
+			money: currentCash + amount,
+		});
 	};
 
 	mortgageOrBuyHouse = (value) => {
@@ -806,12 +816,21 @@ class PlayerInGame extends React.Component {
 						</div>
 					</div>
 					<hr style={this.hrStyle} />
+					<div className="row">
+						<div style={this.actionArea} className="col-6">
+							<PassedGo
+								text={'Passed Go'}
+								collectMoney={this.passedGo}
+							/>
+						</div>
+						<div style={this.actionArea} className="col-6">
+							<CollectFromBank
+								text={'Collect'}
+								bankPays={this.collectFromBank}
+							/>
+						</div>
+					</div>
 					<div>
-						<PassedGo
-							text={'Passed Go'}
-							collectMoney={this.passedGo}
-						/>
-
 						<div className="row">
 							<div style={this.actionArea} className="col-6">
 								<BuyProperty

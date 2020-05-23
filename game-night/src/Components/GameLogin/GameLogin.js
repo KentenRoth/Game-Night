@@ -12,6 +12,7 @@ class GameLogin extends React.Component {
 		super(props);
 		this.state = {
 			redirect: false,
+			joinGameRedirect: false,
 			currentGames: [],
 			cardAppear: false,
 			selectedInput: '',
@@ -37,6 +38,13 @@ class GameLogin extends React.Component {
 	}
 
 	onSubmit = (e) => {
+		const token = this.state.token;
+		const config = {
+			headers: {
+				Authorization: 'Bearer ' + token,
+			},
+		};
+
 		const name = e.target.name.value;
 		const password = e.target.password.value;
 		e.preventDefault();
@@ -54,6 +62,33 @@ class GameLogin extends React.Component {
 					localStorage.setItem('gameID', res.data.game._id);
 					localStorage.setItem('gameAuthToken', res.data.authToken);
 				}
+			})
+			.then((res) => {
+				if (res.status === 201) {
+					console.log(res);
+					const gameAuthToken = res.data.authToken;
+					const gameID = res.data.game._id;
+					const userID = localStorage.getItem('userID');
+					localStorage.setItem('gameAuthToken', gameAuthToken);
+					localStorage.setItem('gameID', gameID);
+					axios
+						.patch(
+							`/user/${userID}`,
+							{
+								currentGames: {
+									gameName: name,
+									gameToken: gameAuthToken,
+									gameID,
+								},
+							},
+							config
+						)
+						.then((res) => {
+							if (res.status === 200) {
+								this.setState({ joinGameRedirect: true });
+							}
+						});
+				}
 			});
 	};
 
@@ -64,10 +99,14 @@ class GameLogin extends React.Component {
 	};
 
 	render() {
-		const { redirect } = this.state;
+		const { redirect, joinGameRedirect } = this.state;
 
 		if (redirect) {
 			return <Redirect to="/InGame" />;
+		}
+
+		if (joinGameRedirect) {
+			return <Redirect to="/CreatePlayer" />;
 		}
 
 		return (

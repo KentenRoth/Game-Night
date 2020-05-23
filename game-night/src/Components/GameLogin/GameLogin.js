@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { CSSTransition } from 'react-transition-group';
+import { Redirect } from 'react-router-dom';
 
 import LargeButton from '../Buttons/LargeButton';
 import Input from '../Inputs/Input';
@@ -13,7 +14,7 @@ class GameLogin extends React.Component {
 			redirect: false,
 			currentGames: [],
 			cardAppear: false,
-			selectedInput: ''
+			selectedInput: '',
 		};
 		this.onSubmit = this.onSubmit.bind(this);
 	}
@@ -22,20 +23,20 @@ class GameLogin extends React.Component {
 		const token = localStorage.getItem('userAuthToken');
 		const config = {
 			headers: {
-				Authorization: 'Bearer ' + token
-			}
+				Authorization: 'Bearer ' + token,
+			},
 		};
 
 		const userID = localStorage.getItem('userID');
-		axios.get(`/user/${userID}`, config).then(res =>
+		axios.get(`/user/${userID}`, config).then((res) =>
 			this.setState({
 				currentGames: res.data.currentGames,
-				cardAppear: true
+				cardAppear: true,
 			})
 		);
 	}
 
-	onSubmit = e => {
+	onSubmit = (e) => {
 		const name = e.target.name.value;
 		const password = e.target.password.value;
 		e.preventDefault();
@@ -45,9 +46,9 @@ class GameLogin extends React.Component {
 		axios
 			.post('/game/login', {
 				name,
-				password
+				password,
 			})
-			.then(res => {
+			.then((res) => {
 				console.log(res);
 				if (res.status === 200) {
 					localStorage.setItem('gameID', res.data.game._id);
@@ -55,7 +56,20 @@ class GameLogin extends React.Component {
 				}
 			});
 	};
+
+	saveGameInfo = (value) => {
+		localStorage.setItem('gameID', value.gameID);
+		localStorage.setItem('gameAuthToken', value.gameToken);
+		this.setState({ redirect: true });
+	};
+
 	render() {
+		const { redirect } = this.state;
+
+		if (redirect) {
+			return <Redirect to="/InGame" />;
+		}
+
 		return (
 			<div className="content">
 				<div className="container">
@@ -67,11 +81,13 @@ class GameLogin extends React.Component {
 							classNames={'fade'}
 						>
 							<div>
-								{this.state.currentGames.map(game => (
+								{this.state.currentGames.map((game) => (
 									<CurrentGamesCard
-										key={game.gameName}
+										key={game.gameID}
 										gameName={game.gameName}
+										gameID={game.gameID}
 										gameToken={game.gameToken}
+										saveGameInfo={this.saveGameInfo}
 									/>
 								))}
 							</div>
@@ -114,19 +130,19 @@ class GameLogin extends React.Component {
 		);
 	}
 
-	whatInput = e => {
+	whatInput = (e) => {
 		if (e.target.name === 'name') {
 			return this.setState({
 				selectedInput: 'Game Name',
 				error: '',
-				fade: true
+				fade: true,
 			});
 		}
 		if (e.target.name === 'password') {
 			return this.setState({
 				selectedInput: 'Password',
 				error: '',
-				fade: true
+				fade: true,
 			});
 		}
 	};

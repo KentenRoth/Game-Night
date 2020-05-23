@@ -7,8 +7,15 @@ class CurrentGames extends React.Component {
 		super(props);
 		this.doThis = this.doThis.bind(this);
 	}
-	doThis = e => {
+	doThis = (e) => {
 		e.preventDefault();
+		console.log(this.props);
+		let gameInfo = {
+			gameID: this.props.gameID,
+			gameToken: this.props.gameToken,
+		};
+
+		this.props.saveGameInfo(gameInfo);
 	};
 
 	render() {
@@ -36,11 +43,11 @@ const outterBox = {
 	border: '3px solid white',
 	curser: 'pointer',
 	margin: '20px',
-	width: '350px'
+	width: '350px',
 };
 
 const innerBox = {
-	padding: '1px'
+	padding: '1px',
 };
 
 export default CurrentGames;

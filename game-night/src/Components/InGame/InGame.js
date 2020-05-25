@@ -9,7 +9,7 @@ class InGame extends React.Component {
 		this.state = {
 			players: [],
 			gameID: localStorage.getItem('gameID'),
-			gameToken: localStorage.getItem('gameAuthToken')
+			gameToken: localStorage.getItem('gameAuthToken'),
 		};
 	}
 
@@ -18,19 +18,28 @@ class InGame extends React.Component {
 		// const gameID = this.state.gameID;
 		const config = {
 			headers: {
-				Authorization: 'Bearer ' + token
-			}
+				Authorization: 'Bearer ' + token,
+			},
 		};
-		axios.get(`/ingameuser`, config).then(res => {
+		axios.get(`/ingameuser`, config).then((res) => {
 			this.setState({ players: res.data });
 		});
 	}
+
+	saveGameInfo = (value) => {
+		console.log(value);
+	};
+
 	render() {
 		return (
 			<div className="container">
 				<div style={cards}>
-					{this.state.players.map(player => (
-						<InGamePlayerCard key={player._id} players={player} />
+					{this.state.players.map((player) => (
+						<InGamePlayerCard
+							key={player._id}
+							players={player}
+							saveGameInfo={this.saveGameInfo}
+						/>
 					))}
 				</div>
 			</div>
@@ -39,7 +48,7 @@ class InGame extends React.Component {
 }
 
 const cards = {
-	margin: 'auto'
+	margin: 'auto',
 };
 
 export default InGame;

@@ -5,7 +5,11 @@ import SmallButton from '../Buttons/SmallButton';
 const InGamePlayerCard = (props) => {
 	const isCorrectPlayer = (e) => {
 		e.preventDefault();
-		console.log(props.players.name);
+		const userInfo = {
+			name: props.players.name,
+			pin: e.target.number.value,
+		};
+		props.saveGameInfo(userInfo);
 	};
 
 	return (
@@ -13,7 +17,11 @@ const InGamePlayerCard = (props) => {
 			<div>
 				<form onSubmit={isCorrectPlayer}>
 					<p>{props.players.name}</p>
-					<input type="number" />
+					<input
+						type="password"
+						name="number"
+						placeholder="Pin Number"
+					/>
 					{/* <hr style={hrStyle} />
 					<div className="row">
 						<div className="col-6">
